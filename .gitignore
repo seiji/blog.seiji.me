@@ -1,0 +1,4 @@
+.bundle/bin
+.bundle/gems
+_site
+vendor

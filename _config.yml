@@ -1,0 +1,9 @@
+name: SiteName
+author:
+  name: Seiji Toyama
+  email: seijit@me.com
+markdown: rdiscount
+safe: false
+lsi: false
+pygments: true
+exclude: ["vendor"]

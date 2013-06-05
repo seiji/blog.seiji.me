@@ -8,3 +8,9 @@ gem 'maruku',     '=0.6.1'
 gem 'rdiscount',  '=1.6.8'
 gem 'RedCloth',   '=4.2.9'
 gem 'pygments.rb','=0.5.0'
+
+group :development do
+  gem 'capistrano'
+  gem 'capistrano-ext'
+  gem 'capistrano_colors'
+end

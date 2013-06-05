@@ -17,3 +17,29 @@ task :new_post, [:title] do |t, args|
                             ))
   end
 end
+
+desc "build"
+task :build do |t|
+  %x(bundle exec jekyll build)
+end
+
+desc "Clean _sites and rebuild"
+task :clean do |t|
+  %x(rm -Rf _site/* && bundle exec jekyll build)
+end
+
+desc "Preview"
+task :preview do
+  %x(bundle exec jekyll serve)
+end
+
+desc "Preview Draft"
+task :draft do
+  %x(bundle exec jekyll serve --drafts)
+end
+
+desc "Watch"
+task :watch do
+  %x(bundle exec jekyll serve --watch)
+end
+

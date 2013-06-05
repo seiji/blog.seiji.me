@@ -7,5 +7,5 @@ markdown: rdiscount
 safe: false
 lsi: false
 pygments: true
-exclude: ['Capfile', 'Gemfile', 'Gemfile.lock', 'README.md', 'Rakefile', 'config']
+exclude: ['Capfile', 'Gemfile', 'Gemfile.lock', 'README.md', 'Rakefile', 'config', 'misc']
 paginate: 5

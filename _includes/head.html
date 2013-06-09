@@ -1,0 +1,22 @@
+<head>
+  <meta charset='utf-8'>
+  <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.name }}</title>
+  <meta content='{{ site.author.name }}' name='author'>
+  {% capture description %}{% if page.description %}{{ page.description }}{% else %}{{ content | raw_content }}{% endif %}{% endcapture %}
+  <meta content='{{ description | strip_html | condense_spaces | truncate:150 }}' name='description'>
+  {% if page.keywords %}
+  <meta content='{{ page.keywords }}' name='keywords'>
+  {% endif %}
+  <meta content='True' name='HandheldFriendly'>
+  <meta content='320' name='MobileOptimized'>
+  <meta content='width=device-width, initial-scale=1.0' name='viewport'>
+  {% capture canonical %}{{ site.url }}{% if site.permalink contains '.html' %}{{ page.url }}{% else %}{{ page.url | remove:'index.html' }}{% endif %}{% endcapture %}
+  <link href='{{ canonical }}' rel='canonical'>
+  <link href='{{ root_url }}/favicon.png' rel='icon'>
+  <link href='/assets/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+  <link href='/assets/vendor/bootstrap/css/bootstrap-responsive.min.css' rel='stylesheet' type='text/css'>
+  <link href='/assets/stylesheets/syntax.css' rel='stylesheet' type='text/css'>
+  <link href='/assets/stylesheets/flat-ui.css' rel='stylesheet' type='text/css'>
+  <link href='/assets/stylesheets/main.css' rel='stylesheet' type='text/css'>
+  <link href='{{ site.subscribe_rss }}' rel='alternate' title='{{site.name}}' type='application/atom+xml'>
+</head>

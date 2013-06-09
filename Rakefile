@@ -20,26 +20,40 @@ end
 
 desc "build"
 task :build do |t|
+  Rake::Task["haml"].invoke
   %x(bundle exec jekyll build)
 end
 
 desc "Clean _sites and rebuild"
 task :clean do |t|
-  %x(rm -Rf _site/* && bundle exec jekyll build)
+  %x(rm -Rf _site/*)
+  Rake::Task["build"].invoke
 end
 
 desc "Preview"
 task :preview do
+  Rake::Task["haml"].invoke
   %x(bundle exec jekyll serve)
 end
 
 desc "Preview Draft"
 task :draft do
+  Rake::Task["haml"].invoke
   %x(bundle exec jekyll serve --drafts)
 end
 
 desc "Watch"
 task :watch do
+  Rake::Task["haml"].invoke
   %x(bundle exec jekyll serve --watch)
 end
 
+desc "haml layouts"
+task :haml do
+  %w(_layouts _includes).each do |dir|
+    system(%{
+      cd #{dir}/haml &&
+      for f in *.haml; do [ -e $f ] && haml $f ../${f%.haml}.html; done
+    })
+  end
+end

@@ -1,0 +1,10 @@
+{% capture root_url %}{{ site.root | strip_slash }}{% endcapture %}
+!!! 5
+%html
+  {% include head.html %}
+  %body
+    %header{:role => 'banner'} {% include header.html %}
+    %nav{:role => 'navigation'} {% include navi.html %}
+    %div#main
+      %div#content
+        {{ content | expand_urls: root_url }}

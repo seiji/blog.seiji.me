@@ -32,7 +32,7 @@ namespace :deploy do
   
   desc 'Run jekyll to update site before uploading'
   task :update_jekyll do
-    %x(rm -rf _site/* && jekyll build)
+    %x(rm -rf _site/* && bundle exec rake build)
   end
   
   # desc "applies the nginx config symlink"

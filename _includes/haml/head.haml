@@ -1,0 +1,26 @@
+%head
+  %meta{ charset: 'utf-8' }
+  %title {% if page.title %}{{ page.title }} - {% endif %}{{ site.name }}
+  %meta{name: 'author', content: "{{ site.author.name }}"}
+  {% capture description %}{% if page.description %}{{ page.description }}{% else %}{{ content | raw_content }}{% endif %}{% endcapture %}
+  %meta{name: 'description', content: "{{ description | strip_html | condense_spaces | truncate:150 }}"}
+  {% if page.keywords %}
+  %meta{name: 'keywords', content: "{{ page.keywords }}"}
+  {% endif %}
+  %meta{name: 'HandheldFriendly', content: 'True'}
+  %meta{name: 'MobileOptimized', content: '320'}
+  %meta(content="width=device-width, initial-scale=1.0" name="viewport")
+  {% capture canonical %}{{ site.url }}{% if site.permalink contains '.html' %}{{ page.url }}{% else %}{{ page.url | remove:'index.html' }}{% endif %}{% endcapture %}
+  
+  %link{rel: 'canonical', href:"{{ canonical }}"}
+  %link{rel: 'icon', href:"{{ root_url }}/favicon.png"}
+  
+    
+  %link{rel: 'stylesheet', type: 'text/css', href: '/assets/vendor/bootstrap/css/bootstrap.min.css'}
+  %link{rel: 'stylesheet', type: 'text/css', href: '/assets/vendor/bootstrap/css/bootstrap-responsive.min.css'}
+  %link{rel: 'stylesheet', type: 'text/css', href: '/assets/stylesheets/syntax.css'}
+  %link{rel: 'stylesheet', type: 'text/css', href: '/assets/stylesheets/flat-ui.css'}
+  %link{rel: 'stylesheet', type: 'text/css', href: '/assets/stylesheets/main.css'}
+  -# %script{:src=>'/javascripts/jquery-1.8.3.min.js'}
+  -# screen.css, modernizr-2.0.js octopress.js
+  %link{rel: 'alternate', title: "{{site.name}}", type: 'application/atom+xml', href: "{{ site.subscribe_rss }}"}

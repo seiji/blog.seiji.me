@@ -1,14 +1,17 @@
-%ul.subscription{"data-subscription" => "rss{% if site.subscribe_email %} email{% endif %}"}
-  %li
-    %a{href: "{{ site.subscribe_rss }}", rel: "subscribe-rss", title: "subscribe via RSS"}RSS
-  %li
-    %a{href: "{{ site.subscribe_email }}", rel: "subscribe-email", title: "subscribe via email"}Email
-%form{action: "{{ site.simple_search }}", method: 'get'}
-  %fieldset{role: 'search'}
-    %input{type: 'hidden', name: 'q', value: "site:{{ site.url | shorthand_url }}"}
-    %input.search{type: 'text', name: 'q', results: "0", placeholder: "Search"}
-%ul.main-navigation
-  %li
-    %a{href:"{{ root_url }}/"}Blog
-  %li
-    %a{href:"{{ root_url }}/blog/archives"}Archives
+%div.navbar.navbar-inverse
+  %div.navbar-inner
+    %div.container
+      %button.btn.btn-navbar{type: 'button', "data-toggle" => "collapse", "data-target" => "#nav-collapse-03" }
+      %a.brand{href: "#"} {{site.name}}
+      %div.nav-collapse.collapse
+        %ul.nav
+          %li
+            %a{href: ''} Blog
+          %li
+            %a{href: '/blog/archives/'} Archives
+        %form.navbar-search.form-search.pull-right{action: "", align: "center"}
+          %div.input-append
+            %input{type: 'hidden', name: 'q', value: "site:{{ site.url | shorthand_url }}"}
+            %input.search-query.span2{type: 'text', name: 'q', results: "0", placeholder: "Search"}
+            %button.btn.btn-large{type: "submit"}
+              %i.fui-search

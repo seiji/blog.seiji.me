@@ -3,8 +3,9 @@
 %html
   {% include head.html %}
   %body
-    %header{:role => 'banner'} {% include header.html %}
-    %nav{:role => 'navigation'} {% include navi.html %}
-    %div#main
-      %div#content
+    %div.container
+      %header{:role => 'banner'} {% include header.html %}
+      %nav{:role => 'navigation'} {% include navi.html %}
+      %div.row
         {{ content | expand_urls: root_url }}
+      %footer {% include footer.html %}

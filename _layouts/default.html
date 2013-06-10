@@ -3,12 +3,13 @@
 <html>
   {% include head.html %}
   <body>
-    <header role='banner'>{% include header.html %}</header>
-    <nav role='navigation'>{% include navi.html %}</nav>
-    <div id='main'>
-      <div id='content'>
+    <div class='container'>
+      <header role='banner'>{% include header.html %}</header>
+      <nav role='navigation'>{% include navi.html %}</nav>
+      <div class='row'>
         {{ content | expand_urls: root_url }}
       </div>
+      <footer>{% include footer.html %}</footer>
     </div>
   </body>
 </html>

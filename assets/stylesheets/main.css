@@ -4,54 +4,125 @@
 /*
 /*****************************************************************************/
 
-/* Global Reset */
-* {
-  margin: 0;
-  padding: 0;
-}
-
-html, body { height: 100%; }
-
-body {
-  background-color: #FFF;
-  font: 13.34px Helvetica, Arial, sans-serif;
-  font-size: small;
-  text-align: center;
-}
-
 h1, h2, h3, h4, h5, h6 {
-  font-size: 100%; }
-
-h1 { margin-bottom: 1em; }
-p { margin: 1em 0; }
-
-a         { color: #00a; }
-a:hover   { color: #000; }
-a:visited { color: #a0a; }
-
-table {
-  font-size: inherit;
-  font: 100%;
+    text-rendering: optimizeLegibility;
+    line-height: 1.15em;
+    clear: both;
+    margin: 1em 0 1em 0;
+    height: auto;
 }
 
+header h1 {
+    font-size: 40px;
+    margin: 0.5em 0 0.5em 0;
+
+}
 /*****************************************************************************/
 /*
-/* Home
+/* Article
 /*
 /*****************************************************************************/
-ul.posts {
-  list-style-type: none;
-  margin-bottom: 2em;
+
+article h1 {
+    font-size: 28px;
 }
 
-ul.posts li {
-  line-height: 1.75em;
+article h2 {
+    font-size: 24px;
 }
 
-ul.posts span {
-  color: #aaa;
-  font-family: Monaco, "Courier New", monospace;
-  font-size: 80%;
+article h3 {
+    font-size: 20px;
+}
+
+/* article header p.meta { */
+/*     text-transform: uppercase; */
+/*     position: absolute; */
+/*     top: 0; */
+/* } */
+
+article header p {
+    font-size: 1.2em;
+    color: #aaa;
+    margin: 0;
+}
+
+article figure.code {
+    background: none;
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+
+.highlight, .gist-highlight {
+    margin-bottom: 1.8em;
+    background: #002b36;
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+
+.highlight, html .gist .gist-file .gist-syntax .gist-highlight {
+    border: 1px solid #05232b !important;
+}
+.highlight table td.code, html .gist .gist-file .gist-syntax .gist-highlight table td.code {
+    width: 100%;
+    
+}
+.highlight .line-numbers, html .gist .gist-file .gist-syntax .gist-highlight .line-numbers {
+    text-align: right;
+    font-size: 12px;
+    line-height: 1.65em;
+    background: #073642 url('/assets/images/noise.png?1337411416') top left !important;
+    border-right: 1px solid #00232c !important;
+    -webkit-box-shadow: #083e4b -1px 0 inset;
+    -moz-box-shadow: #083e4b -1px 0 inset;
+    box-shadow: #083e4b -1px 0 inset;
+    text-shadow: #021014 0 -1px;
+    padding: .8em !important;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
+}
+.highlight .line-numbers span, html .gist .gist-file .gist-syntax .gist-highlight .line-numbers span {
+    color: #586e75 !important;
+}
+.highlight pre {
+    white-space: pre;
+    background: #002b36;
+    padding: 0;
+    font-size: 12px;
+    line-height: 1.65em;
+}
+.highlight table{
+    table-layout: fixed;
+    min-width: 947px;
+}
+.highlight table th, .highlight table td.code {
+    overflow: hidden;
+}
+.pre-code, html .gist .gist-file .gist-syntax .gist-highlight pre, .highlight code {
+    overflow: scroll;
+    overflow-y: hidden;
+    display: block;
+    padding: .8em .1em !important;
+    overflow-x: auto;
+    line-height: 1.65em;
+    background: #002b36 url('/assets/images/noise.png?1337411416') top left !important;
+    color: #93a1a1 !important;
+}
+
+.blog-index .divider {
+  background-color: #e5e5e5;
+  border-bottom: none;
+  margin: 60px 0 20px;
+  padding: 0;
+  height: 2px;
+}
+
+ul.nav-list {
+  margin: 0 0 2em;
 }
 
 /*****************************************************************************/
@@ -133,25 +204,25 @@ ul.posts span {
 /*****************************************************************************/
 
 /* standard */
-#post pre {
-  border: 1px solid #ddd;
-  background-color: #eef;
-  padding: 0 .4em;
-}
+/* #post pre { */
+/*   border: 1px solid #ddd; */
+/*   background-color: #eef; */
+/*   padding: 0 .4em; */
+/* } */
 
-#post ul, #post ol {
-  margin-left: 1.35em;
-}
+/* #post ul, #post ol { */
+/*   margin-left: 1.35em; */
+/* } */
 
-#post code {
-  border: 1px solid #ddd;
-  background-color: #eef;
-  padding: 0 .2em;
-}
+/* #post code { */
+/*   border: 1px solid #ddd; */
+/*   background-color: #eef; */
+/*   padding: 0 .2em; */
+/* } */
 
-#post pre code {
-  border: none;
-}
+/* #post pre code { */
+/*   border: none; */
+/* } */
 
 /* terminal */
 #post pre.terminal {

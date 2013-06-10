@@ -1,15 +1,15 @@
 {% unless page.no_header %}
 %header
+  {% unless page.meta == false %}
+  %p.meta
+    {{ post.date | date_to_string }}
+  {% endunless %}
   {% if index %}
   %h1.entry-title
     %a{href: "{{ root_url }}{{ post.url }}"}{% if site.titlecase %}{{ post.title | titlecase }}{% else %}{{ post.title }}{% endif %}
   {% else %}
   %h1.entry-title {% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}
   {% endif %}
-  {% unless page.meta == false %}
-  %p.meta
-    {% include date.html %}{{ time }}
-  {% endunless %}
 {% endunless %}
 
 {% if index %}

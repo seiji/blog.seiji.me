@@ -1,0 +1,22 @@
+---
+layout: post
+comment: true
+title: "iPod ShuffleとPodcast"
+---
+<p>iPod Shuffle買いました。なぜならジョギングするのに楽だから。iPhoneやnanoだと重いし、ブラブラしますから。Appleにどんどんお布施中。。。</p>
+<p>
+	<br />
+	<img src="http://farm4.static.flickr.com/3177/2980760109_6e8df8dcd8.jpg?v=0" alt="iPod Shuffle" border="0" width="400" height="300" />
+
+</p>
+<!--more--><p>
+	Shuffle持つのは初めてだから、画面がないのにとまどう。それはよいとして、Podcastが再生されないー。うあーと思ったけど、調べてみたらこんなページを発見。</p>
+
+<p>
+	<q>
+		<cite><a href="http://support.apple.com/kb/HT1831?viewlocale=ja_JP&locale=ja_JP">iPod shuffle: オーディオブックおよび Podcast（ポッドキャスト）を再生する</a></cite>
+	</q>
+</p>
+
+<p>手動でドラッグしないといけないのか。そしてシャッフルモードだと再生されないのか。なるほど。。ともあれ、音声の端子と同期の端子が同じなのがすごいなと思いました。(nanoやiPhoneやiPhone touchは別ですからね。）
+</p>

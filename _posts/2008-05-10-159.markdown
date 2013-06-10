@@ -1,0 +1,138 @@
+---
+layout: post
+comment: true
+title: "Blog投稿時のping送信先のまとめ"
+---
+<p>
+記事を人に見てもらう為にはpingサーバーにpingを送信した方が人に見てもらう可能性が上がります。
+pingサーバーや検索エンジンの増減を繰り返している現在ではどこのpingサーバーに送信するのが効率的なのでしょうか？
+</p>
+
+<!--more-->
+### ping送信先
+<p>
+<a href="http://pingoo.jp/" title="pingoo" target="_blank">pingoo</a>などの一括送信サービスも今日増えてきているとは思うのですが、地道に送信したいと思います。では国内のping送信先において、Pingを送信した後、どのくらい検索エンジンのクローラーが見にくるのでしょうか。主要な国内のping送信先を設定し、様子を見たいと思います。(※ ping送信にはWordPressのPluginの<a href="http://daven.se/usefulstuff/wordpress-plugins.html" title="Smart Update Pinger" target="_blank">Smart Update Pinger</a>を使用します。)
+</p>
+<table>
+<caption>ping送信先 (May 10, 08現在)</caption>
+<tr>
+<th>サービス名</th>
+<th>送信先URL</th>
+</tr>
+<tr>
+<td><a href="http://pingomatic.com/">Ping-O-Matic</a></td>
+<td>http://rpc.pingomatic.com/</td>
+</tr>
+<tr>
+<td><a href="http://blogsearch.google.com/">Google Blog Search</a></td>
+<td>http://blogsearch.google.com/ping/RPC2</td>
+</tr>
+<tr>
+<td><a href="http://cm.my.yahoo.com/">My Yahoo!</a></td>
+<td>http://api.my.yahoo.com/RPC2</td>
+</tr>
+<tr>
+<td><a href="http://blog-search.yahoo.co.jp/">Yahoo!ブログ検索</a></td>
+<td>http://api.my.yahoo.co.jp/RPC2</td>
+</tr>
+<tr>
+<td><a href="http://ask.jp/">Ask.jp</a></td>
+<td>http://ping.ask.jp/xmlrpc.m</td>
+</tr>
+<tr>
+<td><a href="http://technorati.com/">Technorati.com</a></td>
+<td>http://rpc.technorati.com/rpc/ping</td>
+</tr>
+<tr>
+<td><a href="http://technorati.jp/">Technorati.jp</a></td>
+<td>http://rpc.technorati.jp/rpc/ping</td>
+</tr>
+<tr>
+<td><a href="http://www.bloglines.com/">Bloglines</a></td>
+<td>http://www.bloglines.com/ping</td>
+</tr>
+<tr>
+<td><a href="http://w.moreover.com/site/products/ind/pingserver.html">Moreover</a></td>
+<td>http://api.moreover.com/ping</td>
+</tr>
+<tr>
+<td><a href="http://www.feedburner.com/">FeedBurner</a></td>
+<td>http://ping.feedburner.com</td>
+</tr>
+<tr>
+<td><a href="http://www.syndic8.com/">Syndic8.com</a></td>
+<td>http://ping.syndic8.com/xmlrpc.php</td>
+</tr>
+<tr>
+<td><a href="http://www.blogrolling.com/">Blogroling.com</a></td>
+<td>http://rpc.blogrolling.com/pinger/</td>
+</tr>
+<tr>
+<td><a href="http://www.icerocket.com/">Icerocket</a></td>
+<td>http://rpc.icerocket.com:10080/</td>
+</tr>
+<tr>
+<td><a href="http://www.weblogs.com/api.html">Weblogs.com : API</a></td>
+<td>http://rpc.weblogs.com/RPC2</td>
+</tr>
+<tr>
+<td><a href="http://www.blogdigger.com/">Blogdigger</a></td>
+<td>http://www.blogdigger.com/RPC2</td>
+</tr>
+<tr>
+<td><a href="http://www.popdex.com/">Popdex</a></td>
+<td>http://www.popdex.com/addsite.php</td>
+</tr>
+<tr>
+<td><a href="http://en.wasalive.com/">WASAlive !</a></td>
+<td>http://www.wasalive.com/ping/</td>
+</tr>
+
+<tr>
+<td><a href="http://newsgator.mykbpro.com/Article_34D76.aspx">NewsGator</a></td>
+<td>http://services.newsgator.com/ngws/xmlrpcping.aspx</td>
+</tr>
+<tr>
+<td><a href="http://reader.livedoor.com/">livedoor reader</a></td>
+<td>http://rpc.reader.livedoor.com/ping</td>
+</tr>
+<tr>
+<td><a href="http://www.blogpeople.net/">BlogPeople</a></td>
+<td>http://www.blogpeople.net/servlet/weblogUpdates</td>
+</tr>
+<tr>
+<td><a href="http://rss.drecom.jp/">ドリコムRSS</a></td>
+<td>http://ping.rss.drecom.jp/</td>
+</tr>
+<tr>
+<td><a href="http://blog.fc2.com/">FC2ブログ</a></td>
+<td>http://ping.fc2.com</td>
+</tr>
+<tr>
+<td><a href="http://www.namaan.net/">NAMAAN</a></td>
+<td>http://ping.namaan.net/rpc/</td>
+</tr>
+<tr>
+<td><a href="http://www.blogstyle.jp/">BlogStyle.jp</a></td>
+<td>http://blogstyle.jp/xmlrpc/</td>
+</tr>
+<tr>
+<td><a href="http://blog-search.net/">バンコムブログサーチ</a></td>
+<td>http://blog-search.net/up.php</td>
+</tr>
+<tr>
+<td><a href="http://ping.bloggers.jp/">ping.blogger.jp</a></td>
+<td>http://ping.bloggers.jp/rpc/</td>
+</tr>
+<tr>
+<td><a href="http://blog.goo.ne.jp/">goo ブログ</a></td>
+<td>http://blog.goo.ne.jp/XMLRPC</td>
+</tr>
+<tr>
+<td><a href="http://r.hatena.ne.jp/">はてなRSS</a></td>
+<td>http://r.hatena.ne.jp/rpc</td>
+</tr>
+</table>
+<p>
+色んなところにpingを送信することより記事の質を高めることが一番重要なのは言うまでもありませんね。
+</p>

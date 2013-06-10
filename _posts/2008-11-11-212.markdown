@@ -1,0 +1,241 @@
+---
+layout: post
+comment: true
+title: "Custom Classの作成-CS193P"
+---
+### Custom Class
+<p>
+Stanford大学のiPhoneアプリケーション開発講座が公開されているので、やってみようと思います。この中のLecture 3 - Custom Classes, PropertiesのAssignment2A。
+	<br />
+<img src="http://img.seiji.me/blog/2008/11/cs193p-cocoa-programming-announcements.jpg" alt="CS193P - Cocoa Programming | Announcements.jpg" border="0" width="430" height="89" />
+	<br />
+	<q>
+		<cite><a href="http://www.stanford.edu/class/cs193p/cgi-bin/index.php">iPhone Application Programming</a></cite>
+	</q>
+</p><!--more--><p>
+	さすがstanfordなのか資料を見るだけでも教え方がよさそうだなと感じます。ここの学生はうらやましいです。
+</p>
+<h4>PolygonShape.h</h4>
+<pre name="code" class="c-sharp"><code>
+#import <cocoa/Cocoa.h>
+
+@interface PolygonShape : NSObject {
+	int numberOfSides;
+	int minimumNumberOfSides;
+	int maximumNumberOfSides;
+}
+
+@property int numberOfSides;
+@property int minimumNumberOfSides;
+@property int maximumNumberOfSides;
+@property (readonly) float angleInDegrees;
+@property (readonly) float angleInRadians;
+@property (readonly) NSString *name;
+
+- (id)init;
+- (id)initWithNumberOfSides:(int)sides minimumNumberOfSides:(int)min maximumNumberOfSides:(int)max;
+- (NSString *)description;
+- (void)dealloc;
+
+@end
+</code></pre>
+
+<h4>PolygonShape.m</h4>
+<pre><code>
+#import "PolygonShape.h"
+
+@implementation PolygonShape
+
+@synthesize numberOfSides;
+@synthesize minimumNumberOfSides;
+@synthesize maximumNumberOfSides;
+
+- (id)init
+{
+	self = [self initWithNumberOfSides:5 minimumNumberOfSides:3 maximumNumberOfSides:10];
+	return self;
+}
+- (id)initWithNumberOfSides:(int)sides minimumNumberOfSides:(int)min maximumNumberOfSides:(int)max
+{
+	if ( (self =[super init]) != nil) {
+		[self setMinimumNumberOfSides:min];
+		[self setMaximumNumberOfSides:max];
+		[self setNumberOfSides:sides];
+        NSLog(@"Initialized with min %d, max %d and number %d",
+			  [self minimumNumberOfSides],
+			  [self maximumNumberOfSides],
+			  [self numberOfSides]
+		);
+	}
+	return self;
+}
+
+-(void)setMaximumNumberOfSides:(int)maxNum
+{
+	if (maxNum > 12) {
+		NSLog(@"%d is larger than 12", maxNum);
+		return;
+	}
+	maximumNumberOfSides = maxNum;
+}
+
+-(void)setMinimumNumberOfSides:(int)minNum
+{
+	if (minNum < 2) {
+		NSLog(@"%d is less than 2", minNum);
+		return;
+	}
+	minimumNumberOfSides = minNum;
+}
+
+- (void)setNumberOfSides:(int)numSides
+{
+	if (numSides < minimumNumberOfSides) {
+		NSLog(@"Invalid number of sides: %d is larger than the minimum number of%d allowed", numSides, minimumNumberOfSides);
+		return;
+	}
+	if (numSides > maximumNumberOfSides) {
+		NSLog(@"Invalid number of sides: %d is less than the maximum number of %d allowed", numSides, maximumNumberOfSides);
+		return;
+	}
+	numberOfSides = numSides;
+}
+
+- (float)angleInDegrees
+{
+	float angleInDegrees = (180 * (numberOfSides - 2) / numberOfSides);
+	return angleInDegrees;
+}
+- (float)angleInRadians
+{
+	float angleInDegrees = (180 * (numberOfSides - 2) / numberOfSides);
+	return angleInDegrees * M_PI / 180.0;
+}
+
+- (NSString *)name
+{
+	static NSString *names[] = {
+		nil,
+		@"Henagon",
+		@"Digon",
+		@"Triangle",
+		@"Quadrilateral",
+		@"Pentagon",
+		@"Hexagon",
+		@"Octogon",
+		@"Heptagon",
+		@"Enneagon",
+		@"Decagon",
+		@"Hendecagon",
+		@"Dodecagon"
+	};
+
+	return names[numberOfSides];
+}
+
+- (NSString *)description
+{
+	return [NSString stringWithFormat:@"Hello I am a %d-sided polygon (aka a %@) with angles of %lf degrees (%lf radians)",
+		  numberOfSides,
+		  [self name],
+		  [self angleInDegrees],
+		  [self angleInRadians]
+	];
+}
+- (void)dealloc {
+	NSLog(@"PolygonShape dealloc");
+	[super dealloc];
+}
+@end
+</code></pre>
+
+<h4>WhatATool.m</h4>
+<pre><code>
+#import <foundation/Foundation.h>
+#import "PolygonShape.h"
+
+/* Section 1 */
+void PrintPathInfo() {
+	NSString *path = @"~";
+	path = [path stringByExpandingTildeInPath];
+	NSLog(@"My home is at '%@'", [path pathComponents]);
+}
+
+/* Section 2 */
+void PrintProcessInfo() {
+	NSProcessInfo *info = [NSProcessInfo processInfo];
+	NSLog(@"Process Name: '%@' Process ID: '%d'", [info processName], [info processIdentifier]);
+}
+
+/* Section 3 */
+void PrintBookMarkInfo() {
+	NSMutableDictionary *bookmark = [NSMutableDictionary dictionary];
+	[bookmark setObject:[NSURL URLWithString:@"http://www.stanford.edu"]
+				 forKey:@"Stanford University"];
+	[bookmark setObject:[NSURL URLWithString:@"http://www.apple.com"]
+				 forKey:@"Apple"];
+	[bookmark setObject:[NSURL URLWithString:@"http://cs193p.stanford.edu"]
+				 forKey:@"CS193P"];
+	[bookmark setObject:[NSURL URLWithString:@"http://itunes.stanford.edu"]
+				 forKey:@"Stanford on iTunes U"];
+	[bookmark setObject:[NSURL URLWithString:@"http://stanfordshop.com"]
+				 forKey:@"Stanford Mail"];
+
+	NSEnumerator *enumKey = [bookmark keyEnumerator];
+	NSString *key;
+	while ( key = [enumKey nextObject]) {
+		if ([key hasPrefix:@"Stanford"]) {
+			NSLog(@"Key: '%@' URL: '%@'", key, [bookmark objectForKey:key]);
+		}
+	}
+}
+/* Section 4 */
+void PrintIntrospectionInfo() {
+	NSMutableArray *ary = [NSMutableArray array];
+	[ary addObject:@"Hello World!"];
+	[ary addObject:[NSURL URLWithString:@"http://www.apple.com"]];
+	[ary addObject:[NSDictionary dictionary]];
+	for (id tmp in ary) {
+		NSLog(@"Class name: %@", [tmp className]);
+		NSLog(@"Is Member of NSString: %d", [tmp isMemberOfClass:[NSString class]]);
+		NSLog(@"Is Kind of NSString: %d", [tmp isKindOfClass:[NSString class]]);
+		NSLog(@"Responds to lowercaseString: %d", [tmp respondsToSelector:@selector(lowercaseString)]);
+		if ([tmp respondsToSelector:@selector(lowercaseString)]){
+			NSLog([tmp performSelector:@selector(lowercaseString)]);
+		}
+		NSLog(@"===========================");
+	}
+}
+
+/* Section 6 */
+void PrintPolygonInfo() {
+
+	NSMutableArray *array = [[[NSMutableArray alloc] init] autorelease];
+	PolygonShape *pol = [[PolygonShape alloc] initWithNumberOfSides:4 minimumNumberOfSides:3 maximumNumberOfSides:7];
+	[array addObject:pol];
+	[pol release];
+	NSLog(@"%@", [pol description]);
+	pol = [[PolygonShape alloc] initWithNumberOfSides:6 minimumNumberOfSides:5 maximumNumberOfSides:9];
+	[array addObject:pol];
+	[pol release];
+	NSLog(@"%@", [pol description]);
+	pol = [[PolygonShape alloc] initWithNumberOfSides:12 minimumNumberOfSides:9 maximumNumberOfSides:12];
+	[array addObject:pol];
+	[pol release];
+
+	// test the constraints
+	for (PolygonShape *tmp in array) {
+		[tmp setNumberOfSides:10];
+	}
+}
+int main (int argc, const char * argv[]) {
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+
+	PrintPolygonInfo();
+	[pool drain];
+    return 0;
+}
+</code></pre>
+
+<p>
+Assignmentはちゃんと満たしてますでしょうか？　//</p>

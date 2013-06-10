@@ -1,0 +1,50 @@
+---
+layout: post
+comment: true
+title: "Making a CGRect"
+---
+<p>
+	<br />
+<img src="http://img.seiji.me/blog/2008/12/making-cgrect1.png" alt="Making CGRect.png" border="0" width="210" height="181" />
+	<br />
+
+</p>
+<p>CGRectには様々な作成方法があります。それをまとめておきます。
+</p>
+<p>下のようなCGRectを作成したいと思います。
+</p>
+<h4>出力</h4>
+<pre class="console"><code>HelloWorld[52159:20b]{% raw %} {{0, 0}, {320, 480}}{% endraw %} 
+</code></pre>
+<br />
+
+<!--more--><h4>作成方法1</h4>
+<pre><code>CGRect rect = CGRectMake(0, 0, 320, 480);
+</code></pre>
+
+<h4>作成方法2</h4>
+<pre><code>CGRect rect = {% raw %} {{0,0}, {320, 480}}{% endraw %} ;
+</code></pre>
+
+<h4>作成方法3</h4>
+<pre><code>CGSize size = CGSizeMake(320, 480);
+CGRect rect = {% raw %} {{0,0}, size}{% endraw %} ;
+</code></pre>
+
+<h4>作成方法4</h4>
+<pre><code>CGPoint point = CGPointMake(0, 0);
+CGSize size = CGSizeMake(320, 480);
+CGRect rect = {point, size};
+</code></pre>
+
+<h4>作成方法5</h4>
+<pre><code>CGSize size = CGSizeMake(320, 480);
+CGRect rect = {% raw %} {{0}, size} {% endraw %} ;
+</code></pre>
+
+<h4>作成方法6</h4>
+<pre><code>CGSize size = CGSizeMake(320, 480);
+CGRect rect = {% raw %} {{}, size} {% endraw %} ;
+</code></pre>
+
+<p>他にもいろいろあるかとは思いますが、構造で定義できるのは便利ですね。</p>

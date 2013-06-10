@@ -1,0 +1,38 @@
+---
+layout: post
+comment: true
+title: "Blog構築時の検索エンジンへのURL登録"
+---
+<p>
+Blog構築時には検索エンジンが探してくれるようにURLを登録した方が良いでしょう。
+</p>
+
+<!--more-->
+### URL登録先
+<p>
+検索エンジンのCrawlerを呼び込む為にいくつかの検索エンジンでBlogのURLを登録する必要があります。
+</p>
+<table>
+<caption>URL登録先 (May 11, 08現在)</caption>
+<tr>
+<th>検索エンジン</th>
+<th>サイトURL登録ページ</th>
+</tr>
+<tr>
+<td>Google</td>
+<td><a href="http://www.google.com/addurl/?continue=/addurl" target="_blank">http://www.google.com/addurl/?continue=/addurl</a></td>
+</tr>
+<tr>
+<td>Yahoo! Japan</td>
+<td><a href="http://submit.search.yahoo.co.jp/add/request" target="_blank">http://submit.search.yahoo.co.jp/add/request</a></td>
+</tr>
+<tr>
+<td>MSN</td>
+<td><a href="http://beta.search.msn.com/docs/submit.aspx" target="_blank">http://beta.search.msn.com/docs/submit.aspx</a></td>
+</tr>
+<tr>
+<td>Baidu(百度)</td>
+<td><a href="http://blog.baidu.jp/utility/submit.php" target="_blank">http://blog.baidu.jp/utility/submit.php</a></td>
+</tr>
+
+</table>

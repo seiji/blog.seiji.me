@@ -1,0 +1,30 @@
+---
+layout: post
+comment: true
+title: "RSSFeed Error"
+---
+<p>自宅サーバーからCoreServerに移行した。WordPressも2.6系に変えた。Domainも変わったのでFeedburnerも変えなくてはいけない。その際、FeedValidatorでValidateしたところXMLがおかしい。調べると　guidの値がおかしい。以下のようになっている。
+</p>
+<pre><code>
+&lt;guid isPermaLink="false"&gt;
+&lt;p&gt;
+最近歯医者に通ってます。なのでおいしいものは控えます。サーバー引越します。
+&lt;br /&gt;
+1位は蛇ですか。。まじですか。。
+
+&lt;/p&gt;
+&lt;br /&gt;
+&lt;q&gt;
+&lt;cite&gt;&lt;a href="http://foodproof.com/blogs/view/post/100-things-you-should-eat-before-249"&gt;100 Thi
+&lt;/guid&gt;
+</code></pre>
+
+<!--more--><p>
+これでは明らかにおかしい。guidはそもそも記事のユニークID(URLなど)を指定しなければいけない。記事の頭の一部だとユニークとも言えない。Import時の弊害だと思われる。仕方ないのでDBの値を直接書き換えることにする。
+</p>
+### guidの変更
+<p>UPDATE文を直接な実行することにする。幸いCoreServerは直接SSHログインから実行できるので、そこで実行する。同一テーブル(wp_posts)のIDの値からURLを生成し、UPDATEする。実行するSQLは以下である。</p>
+<pre><code>
+mysql>update wp_posts set guid=concat('http://blog.seiji.me/', ID, '.html');
+</code></pre>
+<p>これで全てユニークID(URL)になったはず</p>

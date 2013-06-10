@@ -1,0 +1,26 @@
+---
+layout: post
+comment: true
+title: "wp_list_pagesのli要素の中を変更 (WordPress)"
+---
+<p>WordPressのPageリストを表示するにはwp_list_pagesを使えばいいですが、要素の中を変更したい場合がありましたのでそのTipsです。</p>
+<p>
+<img src="http://img.seiji.me/blog/2008/05/wordpress-blog-tool-and-weblog-platform1.jpg" alt="WordPress › Blog Tool and Weblog Platform.jpg" border="0" width="326" height="77" /><br />
+<q><a href="http://wordpress.org/" target="_blank"><cite>WordPress.org</cite></a></q>
+</p>
+
+
+<!--more-->
+
+<p>spanタグを単純に挿入したかったという動機なのですが、下のように修正しました。
+</p>
+<pre><code>&lt;ul id="navi"&lgt;
+  &lt;?php
+    $pages =  wp_list_pages('title_li=&echo=0');
+    $pages = str_replace('&lt;/li&gt;', '&lt;span&gt;&lt;/span&gt;&lt;/li&gt;', $pages);
+    echo $pages;
+  ?&gt;
+&lt;/ul&gt;</code></pre>
+
+<p>これを使用してこのサイトのナビゲーションを作成したいと思います。
+</p>

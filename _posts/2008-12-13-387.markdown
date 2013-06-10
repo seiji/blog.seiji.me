@@ -1,0 +1,117 @@
+---
+layout: post
+comment: true
+title: "NSInvocationOperation,delegatePattern-CS193P"
+---
+### NSInvocationOperation,delegatePattern
+
+<p>Lecture12迄の内容を基に"Presence"アプリケーションを拡張していきます。
+AssignmentPresence3になります。
+<br />
+<img src="http://img.seiji.me/blog/2008/11/cs193p-cocoa-programming-announcements.jpg" alt="CS193P - Cocoa Programming | Announcements.jpg" border="0" width="430" height="89" />
+	<br />
+	<q>
+		<cite><a href="http://www.stanford.edu/class/cs193p/cgi-bin/index.php">iPhone Application Programming</a></cite>
+	</q>
+</p><!--more--><p>
+今迄、作成したソースは<a href="http://public.me.com/seijit/iPhone/CS193P">http://public.me.com/seijit/iPhone/CS193P</a>から
+</p>
+
+### 今回の目標
+<p>前回迄は全てMainThreadで通信を行っていました。その為、待ち時間が長く感じられ、ストレスを受けていたのではないかと思います。今回はそのストレスを軽減する為に別Threadで通信を行い、最後にMainThreadの処理を返すように実装を行います。アプリケーションとしては下の図のように自分のStatusをUpdateする画面を用意し、そこからSendできるようにします。
+<br /><br />
+<img src="http://img.seiji.me/blog/2008/12/presence-part3-1-1.jpg" alt="Presence-Part3-1-1.jpg" border="0" width="400" />
+</p>
+<p>
+今回は全てを記述するのは大変なので、要点を絞って記載します。
+</p>
+<h3><img src="http://img.seiji.me/blog/2008/11/xcode.png" alt="picture.png" border="0" width="30" height="30" />NSInvocationOperationの作成</h3>
+<p>ViewがLoadされる際にSelector(synchronousLoadsTwitterUsers)を指定してNSInvocationOperationを作成し、それをNSInvocationOperationQueueにAddします。その中で通信部分の処理を行っています。</p>
+<p>また、作成時に指定したSelector内部ではSelector(didFinishLoadingTwitterUsersWithResults)を指定してMainThreadに返しています。
+</p>
+<pre><code>- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+	if ([myData count] == 0) {
+		[self showLoadingIndicators];
+		[self beginLoadingTwitterUsers];
+	}
+}
+- (void)beginLoadingTwitterUsers {
+	[myData removeAllObjects];
+
+	NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronousLoadsTwitterUsers) object:nil];
+	[operationQueue addOperation:operation];
+	[operation release];
+}
+- (void)synchronousLoadsTwitterUsers {
+	NSBundle *bundle = [NSBundle mainBundle];
+	NSArray *twitterUsers = [NSArray arrayWithContentsOfFile:[bundle pathForResource:@"TwitterUsers" ofType:@"plist"]];
+
+	for (NSString *userName in twitterUsers){
+		Person *person = [[Person alloc] initWithPersonName:userName];
+		if (person)
+			[myData addObject:person];
+		[person release];
+	}
+	[self performSelectorOnMainThread:@selector(didFinishLoadingTwitterUsersWithResults) withObject:nil waitUntilDone:NO];
+}
+- (void)didFinishLoadingTwitterUsersWithResults {
+	[self hideLoadingIndicators];
+	[self.tableView reloadData];
+    [self.tableView flashScrollIndicators];
+}</code></pre>
+
+<h3><img src="http://img.seiji.me/blog/2008/11/xcode.png" alt="picture.png" border="0" width="30" height="30" />delegete Patternの使用</h3>
+<p>NavigationItemのRightBarButtonItemをクリックするとStatusComposeする画面をModallyに出すようにしています。</p>
+<pre><code>
+- (void)viewDidLoad {
+    [super viewDidLoad];
+	UIBarButtonItem *addButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(presentModally) ];
+	self.navigationItem.rightBarButtonItem = addButton;
+	[addButton release];
+}
+- (void)presentModally {
+	StatusComposeViewController *statusController = [[StatusComposeViewController alloc]initWithNibName:@"StatusCompose" bundle:nil];
+	statusController.delegate = self;
+	[self presentModalViewController:statusController animated:YES];
+	[statusController release];
+}
+</code></pre>
+<p>この場合、このActionは今回で言うとPersonListViewControllerに実装するわけです。ではこの画面を消すActionはどこに書けばいいのでしょうか？</p>
+
+<p>単純にStatusComposeViewControllerに下のように実装しても消すことはできます。</p>
+<pre><code>
+[self.navigationController dismissModalViewControllerAnimated:YES];
+</code></pre>
+<p>しかし、PresentとDismissするのは同じContorollerからするのが望ましいと言われています。別の操作を行うのにもこの方が操作をしやすいでしょう。</p>
+<p>ここでdelegatePatternを使用します。</p>
+<h4>Protocolの作成</h4>
+<pre><code>@class StatusComposeViewController;
+
+@protocol StatusComposeViewDelegate <nsobject>
+@optional
+- (void)statusComposeViewControllerDidFinish:(StatusComposeViewController *)controller;
+- (void)statusComposeViewControllerDidCancel:(StatusComposeViewController *)controller;
+@end</code></pre>
+<p>今回のdelegateの為のProtocolを作成します。</p>
+<h4>Propertyの追加</h4>
+<pre><code>
+@interface StatusComposeViewController : UIViewController <uitextFieldDelegate> {
+	// 略
+	id <statusComposeViewDelegate> delegate;
+}
+	// 略
+@property (nonatomic, assign) id <statusComposeViewDelegate> delegate;
+	// 略
+@end
+</code></pre>
+<p>StatusComposeViewControllerにStatusComposeViewDelegateを満たしたid型の属性を追加します。</p>
+
+<h4>StatusComposeViewDelegateの実装</h4>
+<p> StatusComposeViewDelegateのメソッド(statusComposeViewControllerDidFinish:, statusComposeViewControllerDidCancel: )を実装します。</p>
+
+<p>これでStatusComposeViewController側でStatusComposeViewDelegateで実装されたPersonListViewControllerのメソッド(i.e [self.delegate statusComposeViewControllerDidFinish:])を呼べばよいわけです。</p>
+
+<p>これでAssignmentPresence3を終了としたいと思います。<br /><br />
+今回作成したソースは<a href="http://public.me.com/seijit/iPhone/CS193P/Lecture12">http://public.me.com/seijit/iPhone/CS193P/Lecture12</a>のPresence5.tar.gzです
+</p>

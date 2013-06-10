@@ -140,11 +140,15 @@ article ul li{
     margin: 3em 0;
 }
 
+.archives-index .row ul li {
+    margin: 0 0 1em 0;
+}
+
 .archives-index h2{
     margin-top: 0;
 }
 
-.archives-index p.meta{
+.blog-index p.meta, .archives-index p.meta{
     font-size: 14px;
     color: #aaa;
 }
@@ -156,11 +160,15 @@ ul.nav-list {
 footer {
     background-color: #edeff1;
     border-top: 2px solid #d6dbdf;
-    font-size: 15.988px;
+    font-size: 10px;
     margin: 0px;
-    padding: 18px 0;
+    padding: 10px 0;
     position: relative;
     text-align: center;
+}
+footer p {
+    color: #999;
+    font-size: 14px;
 }
 /*****************************************************************************/
 /*

@@ -1,0 +1,6 @@
+---
+layout: post
+comment: true
+title: "Top 10 Apps That Should’ve Been in Leopard"
+---
+# 1. PathFinder (file manager)# 2. Parallels (virtual machine) 2. Parallels (virtual machine)# 3. InstantShot (screen capture) 3. InstantShot (screen capture)# 4. MenuShade (menubar hider) 4. MenuShade (menubar hider)# 5. MagiCal (calendar) 5. MagiCal (calendar)# 6. Quicksilver (keyboard interface) 6. Quicksilver (keyboard interface)# 7. App Zapper (uninstaller) 7. App Zapper (uninstaller)# 8. iTerm (tabbed terminal) 8. iTerm (tabbed terminal)# 9. Disk Inventory X (hard drive analyzer) 9. Disk Inventory X (hard drive analyzer)# 10. Hazel (automated folder rules) 10. Hazel (automated folder rules)<a href="http://www.lifehacker.com/software/lifehacker-top-10/top-10-apps-that-shouldve-been-in-leopard-267978.php">http://www.lifehacker.com/software/lifehacker-top-10/top-10-apps-that-shouldve-been-in-leopard-267978.php</a>

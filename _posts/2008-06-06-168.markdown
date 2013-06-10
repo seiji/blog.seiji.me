@@ -1,0 +1,45 @@
+---
+layout: post
+comment: true
+title: "いろいろな標準出力"
+---
+<p>プログラムする中で標準出力はよく使うと思いますが。簡単なまとめです。</p>
+<p>
+<img src="http://img.seiji.me/blog/2008/06/skitched-20080606-184023.jpg" alt="skitched-20080606-184023.jpg" border="0" width="331" height="96" />
+<br />
+</p>
+
+
+
+<!--more-->
+
+
+<p>最近C言語をいじる機会がありましたので改めて</p>
+### C言語
+<p>よく使うのはprintf、putsでしょう。</p>
+<pre><code>
+	printf("%s", 'webscrap'); // webscrap
+	printf("%04x", 'A'); // 0041
+	puts("webscrap"); // webscrap\n
+</code></pre>
+
+### Java (1.5以上)
+<p>ではJavaでそれに相当するのはと</p>
+<pre><code>
+	System.out.println("webscrap"); // webscrap\n
+	System.out.printf("%s","webscrap");　// webscrap
+	System.out.printf("%04x", (int)'A');　// 0041
+	System.out.print("webscrap"); // webscrap
+</code></pre>
+<p>短く書けないものかいつも思うのですが。。</p>
+
+### Python
+<p>ちなみにPythonでは</p>
+<pre><code>
+	print "webscrap" // webscrap\n
+	print "%s","webscrap"　// webscrap
+	print "%04x" % ord('A')　// 0041
+	print "webscrap", // webscrap
+</code></pre>
+
+<p>今回は記述してませんがシェルスクリプトやPHPではechoがありますね。改めていろいろ特徴があるものですね。</p>

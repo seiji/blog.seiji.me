@@ -1,0 +1,80 @@
+---
+layout: post
+comment: true
+title: "iPod touchでiPhone 2.0 Software Update"
+---
+<p>
+iPhoneは未だ買ってませんし、どこ行っても完売のところが多いですね。。まぁ並ばずに買おうとしているので当然でありますけど。さて、iPhone 2.0 Software Updateできました。iPhone Application楽しすぎですね。いくつか入れてみました。
+</p>
+<p>
+<br />
+<a href="http://www.apple.com/jp/ipodtouch/whatsnew.html">
+<img src="http://img.seiji.me/blog/2008/07/ipod-touch-whats-new-1.jpg" alt="アップル - iPod touch - What’s New-1.jpg" border="0" width="250" height="284" /></a>
+<br />
+<q>
+<cite><a href="http://www.apple.com/jp/ipodtouch/whatsnew.html">http://www.apple.com/jp/ipodtouch/whatsnew.html</a></cite>
+</q>
+</p>
+
+
+
+
+
+
+<!--more-->
+
+
+
+
+### iPhone 2.0 Software Update
+<p>
+iPhone 2.0 Software Update for iPod touchは有料なのです。購入してUPDATEする必要があります。すごく時間がかかりました。<br />
+<img src="http://img.seiji.me/blog/2008/07/img-0004.png" alt="IMG_0004.PNG" border="0" width="160" height="240" />
+<br />
+はい、純正に戻りました。JailBreakしてたものが全て使えなくなっています。
+正直、オフラインで使える辞書"WeDict"だけは残して欲しかったのですが、英英辞典として使えるのは貴重でした。AppStoreに似たようなものがあれば良いのですけど。
+</p>
+
+<p>
+適当に人気がありそうなのをAppStoreからchoiceして入れてみます。<br />
+<img src="http://img.seiji.me/blog/2008/07/img-0005.png" alt="IMG_0005.PNG" border="0" width="160" height="240" />
+</p>
+<ul>
+	<li>Evernote</li>
+	<li>Light</li>
+	<li>NetNewsWire</li>
+	<li>Remote</li>
+	<li>WeatherBug</li>
+	<li>駅探エクスプレス</li>
+</ul>
+<p>
+特にRemoteと駅探エクスプレスはすごく良いです。オンライン前提ですけどね。我が家ではAirMacExpressで無線環境を構築してるのでRemoteは特に良いアプリです。これが無料とは素晴らしいです。
+</p>
+
+### Remote
+<p>RemoteとはiPhone及びiPod Touchで同じLAN内のPCのiTunesライブラリを遠隔操作できるものです。要はリモコン代わりになるわけです。AirMacExpressもあればAirTunesとあわせて使用できるようになるわけです。</p>
+<h4>iPod Touch側の設定</h4>
+<p>まず、Appstoreでアプリケーションを購入後(Remoteは無料)、iPod Touchと同期させます。同期後iPod TouchからRemoteを起動すると下のような画面が出てきます。<br />
+<img src="http://img.seiji.me/blog/2008/07/img-0002.png" alt="IMG_0002.PNG" border="0" width="160" height="240" /><br />
+</p>
+
+<p>次にライブラリを追加をクリックすると下のような画面がでてきます。<br />
+<img src="http://img.seiji.me/blog/2008/07/img-0003.png" alt="IMG_0003.PNG" border="0" width="160" height="240" /><br />
+このパスコードでPCのiTunesと認証をとるわけですね。
+</p>
+<h4>PC側(iTunes)の設定</h4>
+<p>iTunes側でパスコードを要求されるので先ほどのパスコードを入力します、<br />
+<img src="http://img.seiji.me/blog/2008/07/itunes-5.jpg" alt="iTunes-5.jpg" border="0" width="395" height="139" />
+<br />
+これで設定は終了です。
+</p>
+<dl>
+<dt>PC側(iTunes)</dt>
+<dd><img src="http://img.seiji.me/blog/2008/07/itunes-6.jpg" alt="iTunes-6.jpg" border="0" width="183" height="207" /></dd>
+<dt>iPod Touch側</dt>
+<dd><img src="http://img.seiji.me/blog/2008/07/img-0006.png" alt="IMG_0006.PNG" border="0" width="160" height="240" /></dd>
+</dl>
+
+<p>これでiTunesを遠隔操作できるようになりました。楽しいですね。
+ちなみに今回iPod Touchで撮ったスクリーンショットをMacBookにどうやって転送しようかで悩みました。メールを送るでは面倒ですしね。。答えは"iTunesとの同期後にiPhotoを開いて読み込む"というものでした。iPhoto6でも動作します。
+</p>

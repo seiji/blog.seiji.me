@@ -1,0 +1,79 @@
+---
+layout: post
+comment: true
+title: "使用しているWordPressのplugins"
+---
+<p style="clear: both">WordPressのpluginは数多くありますが、このサイトで使用しているpluginをまとめておきたいと思います。</p>
+<p>
+<img src="http://img.seiji.me/blog/2008/05/wordpress-wordpress-plugins.jpg" height="67" width="294" alt="wordpress-plugins" />
+<br />
+<q><a href="http://wordpress.org/extend/plugins/" target="_blank"><cite>WordPress › WordPress Plugins</cite></a></q>
+</p>
+<!--more-->
+
+
+### 現在使用中のplugin
+<p style="clear: both">現在このサイトで使用しているpluginは以下になります。
+</p>
+<ul>
+<li>
+ <a href="#akismet">Akismet</a>
+</li>
+<li>
+ <a href="#seo">All in One SEO Pack</a>
+</li>
+<li>
+ <a href="#feedburner">FeedBurner FeedSmith</a>
+</li>
+<li>
+ <a href="#sitemaps">Google XML Sitemaps</a>
+</li>
+<li>
+ <a href="#tags">Simple Tags</a>
+</li>
+<li>
+ <a href="#ping">Smart Update Pinger</a>
+</li>
+<li>
+ <a href="#cache">WP Super Cache</a>
+</li>
+</ul>
+
+<h4> <a name="akismet">Akismet</a></h4>
+<p style="clear: both">CommentSpam、TrackbackSpamを隔離してくれるプラグインで、標準でインストールされています。使用するにはWordPress.orgでAPI Keyを取得する必要があります。<br />
+<q><a href="http://akismet.com/" target="_blank"><cite>Stop Comment Spam and Trackback Spam « Akismet</cite></a></q>
+</p>
+
+<h4> <a name="seo">All in One SEO Pack</a></h4>
+<p style="clear: both">SEO対策のプラグインです。各ページごとにTitle,Keywords,Descriptionをつけるのが簡単にできます。<br />
+<q><a href="http://wp.uberdose.com/2007/03/24/all-in-one-seo-pack/" target="_blank"><cite>Wordpress SEO Plugin</cite></a></q>
+</p>
+
+<h4> <a name="feedburner">FeedBurner FeedSmith</a></h4>
+<p style="clear: both">FeedBurner対応のプラグインです。リダイレクトの処理などをしてくれます。以前の記事でも少しふれました。<a href="http://blog.seiji.me/27.html">FeedBurnerの導入のまとめ (WordPress)</a><br />
+<q><a href="http://www.google.com/support/feedburner/bin/topic.py?topic=13252" target="_blank"><cite>FeedBurner FeedSmith</cite></a></q>
+</p>
+
+<h4> <a name="sitemaps">Google XML Sitemaps</a></h4>
+<p style="clear: both">タイトルそのままです。Googlebotが読みにくる各サイトのサイトマップを生成してくれます。<br />
+<q><a href="http://www.arnebrachhold.de/projects/wordpress-plugins/google-xml-sitemaps-generator/" target="_blank"><cite>Google (XML) Sitemaps Generator for WordPress</cite></a></q>
+</p>
+
+<h4> <a name="tags">Simple Tags</a></h4>
+<p style="clear: both">各記事にタギングをしてくれます。このサイトのサイドバーのタグクラウドもこれで生成しています。<br />
+<q><a href="http://wordpress.org/extend/plugins/simple-tags/" target="_blank"><cite>WordPress › Simple Tags « WordPress Plugins</cite></a></q>
+</p>
+
+<h4> <a name="ping">Smart Update Pinger</a></h4>
+<p style="clear: both">各pingサーバーへの処理を簡単に、そして使いやすくしてくれます。以前の記事でも少しふれました。<a href="http://blog.seiji.me/12.html">Blog投稿時のping送信先のまとめ</a><br />
+<q><a href="http://daven.se/usefulstuff/wordpress-plugins.html" target="_blank"><cite>Smart Update Pinger</cite></a></q>
+</p>
+
+<h4> <a name="cache">WP Super Cache</a></h4>
+<p style="clear: both">WordPressをキャッシュして高速化させてくれます。<br />
+<q><a href="http://ocaoimh.ie/wp-super-cache/" target="_blank"><cite>WP Super Cache</cite></a></q>
+</p>
+
+<p style="clear: both">まだまだ必要最低限なものしか入れていません。
+この先、新しくpluginを追加した際は<a href="http://blog.seiji.me/system">system</a>のページの方で更新していきたいと思います。
+</p><br class='final-break' style='clear: both' />

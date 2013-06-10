@@ -1,0 +1,16 @@
+---
+layout: post
+comment: true
+title: "色々なアルバイト"
+---
+<p>
+ふとこんなの見つけました。。。
+<br />
+<img src="http://img.seiji.me/blog/20081108-1.jpg" alt="20081108-1.jpg" border="0" width="418" height="191" />
+
+<br />
+話には聞いていたけれど、$6,500が安いと思うのか、高いと思うのか。。女性ではないので何とも言えないけれど、お金では売れないものではないかと思う。でもどういう基準で採用するんでしょうね。子供の為には優れた方の方がよいかと思うけれど。。
+
+</p>
+### MarsEditでのUpload
+<p>このWordPressで構築されているブログはMarsEditから書いているのですが、ふと画像がUploadできないことに気づきました。サーバーの権限が足りないわけではないけれど、問題は<q>Organize my uploads into month- and year-based folders</q>これ。バグ報告にもあがっているようです。早く修正して欲しいです。</p>

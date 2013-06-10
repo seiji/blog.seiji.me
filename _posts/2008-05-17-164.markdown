@@ -1,0 +1,76 @@
+---
+layout: post
+comment: true
+title: "WindowsをKeyboardで移動・リサイズするMercuryMover"
+---
+<p>
+WindowsをKeyboardで移動・リサイズするMac用ソフトMercuryMover。マウスでドラッグする必要がなくなるのが大変気に入りました。
+</p>
+<p><img src="http://img.seiji.me/blog/2008/05/helium-foot-software-makers-of-mercurymover-1.jpg" alt="Helium Foot Software_ Makers of MercuryMover-1.jpg" border="0" width="438" height="142" /><br />
+<q><a href="http://www.heliumfoot.com/mercurymover/" target="_blank"><cite>Helium Foot Software: Makers of MercuryMover</cite></a></q>
+</p>
+
+
+
+
+
+
+
+
+
+
+
+<!--more-->
+
+
+
+
+
+
+
+
+
+### MercuryMoverの設定
+<p>
+インストール後、システム環境設定 &gt;&gt; MercuryMoverで設定することができます。
+まずどのコマンドで起動させるかの設定です。私は次のように設定しています。
+<img src="http://img.seiji.me/blog/2008/05/mercurymover-1.jpg" alt="MercuryMover-1.jpg" border="0" width="500" />
+<table>
+<tr>
+<th>モード</th>
+<th>Key</th>
+</tr>
+<tr>
+<td>移動</td>
+<td>command+option+↑</td>
+</tr>
+<tr>
+<td>右下リサイズ</td>
+<td>command+option+→</td>
+</tr>
+<tr>
+<td>左上リサイズ</td>
+<td>command+option+←</td>
+</tr>
+</table>
+</p>
+
+<p>
+次にモードにした後キーでどのように動かすかの設定です。
+<img src="http://img.seiji.me/blog/2008/05/mercurymover-2.jpg" alt="MercuryMover-2.jpg" border="0" width="500" />
+</p>
+
+### MercuryMoverの動作
+<p>例えば移動コマンドを使ってみることにします。<br />
+command+option+↑を入力
+<img src="http://img.seiji.me/blog/2008/05/skitch-72.jpg" alt="Skitch-7.jpg" border="0" width="500" height="312" />
+<br /><br />
+次にcommand+←を入力
+<img src="http://img.seiji.me/blog/2008/05/skitch-81.jpg" alt="Skitch-8.jpg" border="0" width="500" height="312" />
+<br /><br />
+最後にcommand+→を入力
+<img src="http://img.seiji.me/blog/2008/05/skitch-91.jpg" alt="skitch-9.jpg" border="0" width="500" height="312" />
+</p>
+<p>
+しばらくはコマンド操作に慣れることが必要ですね。シェアウェアですので購入する必要があります。
+</p>

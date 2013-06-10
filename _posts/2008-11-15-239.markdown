@@ -1,0 +1,48 @@
+---
+layout: post
+comment: true
+title: "CoreServerでSubversion"
+---
+<p>レンタルサーバーなので、あまり自由にいじることはできないのですが、CoreServerにSubversionをインストールします。今回はストレージシステムをBerkeley DBではなくfsfsで導入します。
+	<br />
+<img src="http://img.seiji.me/blog/2008/11/11152.jpg" alt="1115.jpg" border="0" width="417" height="137" />
+	<br />
+</p>
+<!--more-->### Subversionのインストール
+<p>最新のstableであるver 1.5.3を導入します。</p>
+<pre class='console'><code>
+$ cd ~/src
+$ wget http://subversion.tigris.org/downloads/subversion-1.5.3.tar.gz
+$ wget http://subversion.tigris.org/downloads/subversion-deps-1.5.3.tar.gz
+$ tar -zxf subversion-1.5.3.tar.gz
+$ tar -zxf subversion-deps-1.5.3.tar.gz
+$ ./configure --prefix=$HOME/local/subversion --with-ssl --without-berkeley-db
+</code></pre>
+### レポジトリの作成
+<p>テスト用のレポジトリを作成します。</p>
+<pre class='console'><code>
+$ mkdir -p ~/var/repos
+$ svnadmin create --fs-type fsfs ~/var/repos/test
+</code></pre>
+
+### レポジトリへのアクセス
+<h4>consoleから</h4>
+<pre class='console'><code>
+$  svn co svn+ssh://${username}@sXX.coreserver.jp/virtual/${username}/var/repos/test
+A    test/trunk
+A    test/branches
+A    test/tags
+リビジョン 1 をチェックアウトしました。
+</code></pre>
+<h4>SVNクライアントから</h4>
+<p>
+<img src="http://img.seiji.me/blog/2008/11/coreserver-versions.jpg" alt="CoreServer — Versions.jpg" border="0" width="434" height="159" /></p>
+<p>このようにアクセスが可能になります。</p>
+
+<h3><q>svn: Expected format '3' of repository; found format '5'</q>のケースには</h3>
+<p>レポジトリを作成したsvnのVersionとアクセスしているサーバー側のVesionが異なっているようです。.bashrcに以下のように記述します。</p>
+<pre class='console'><code>
+$ vi .bashrc
+export PATH=$HOME/local/subversion/bin/:$PATH
+</code></pre>
+<p>後はWebDAV経由でアクセスできればよいんですが。。</p>

@@ -1,0 +1,95 @@
+---
+layout: post
+comment: true
+title: "navigation stackへの追加-CS193P"
+---
+### navigation stackへの追加
+
+<p>前回<a href="http://blog.seiji.me/354.html">UINavigationController, TableViewControllerの作成-CS193P</a>の続きになります。ViewControllerインスタンスをnavigation stackへと追加するところが中心となります。
+<br />
+<img src="http://img.seiji.me/blog/2008/11/cs193p-cocoa-programming-announcements.jpg" alt="CS193P - Cocoa Programming | Announcements.jpg" border="0" width="430" height="89" />
+	<br />
+	<q>
+		<cite><a href="http://www.stanford.edu/class/cs193p/cgi-bin/index.php">iPhone Application Programming</a></cite>
+	</q>
+</p><!--more--><p>
+今迄、作成したソースは<a href="http://public.me.com/seijit/iPhone/CS193P">http://public.me.com/seijit/iPhone/CS193P</a>から
+</p>
+### 今回の目標
+<p>下の図のようなアプリケーションの内、PersonListを選択し、DetailViewを表示できるようになるのが目標です。（右側の図）
+<br /><img src="http://img.seiji.me/blog/2008/12/target-1.png" alt="target-1.png" border="0" width="400" height="337" /></p>
+<h3><img src="http://img.seiji.me/blog/2008/11/xcode.png" alt="xcode.png" border="0" width="30" height="30" />ViewControler,xibの作成</h3>
+<p>今迄と同じようなことなので、図は省略します。</p>
+<ol>
+	<li>TemplateからViewControllerのSubClassを選択し、名前を"PersonDetailViewController"とします。</li>
+	<li>TemplateからView XIBを選択し、名前を"PersonDetail.xib"とします。</li>
+</ol>
+<h4>PersonDetailViewControllerの実装</h4>
+<p>新しく作成したPersonDetailViewControllerを実装します。</p>
+<h5>PersonDetailViewController.h</h5>
+<pre><code>#import &lt;UIKit/UIKit.h&gt;
+
+@interface PersonDetailViewController : UIViewController {
+	NSDictionary* dict;
+	IBOutlet UILabel *name;
+	IBOutlet UIImageView *imageView;
+}
+
+@property (nonatomic, assign) NSDictionary* dict;
+@property (nonatomic, retain) UILabel *name;
+@property (nonatomic, retain) UIImageView *imageView;
+@end</code></pre>
+<h5>PersonDetailViewController.m</h5>
+<p>viewがLoadされた後にNSDictionaryのデータをOutletに展開しています。</p>
+<pre><code>#import "PersonDetailViewController.h"
+
+@implementation PersonDetailViewController
+@synthesize dict;
+@synthesize name;
+@synthesize imageView;
+
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	[self.navigationItem setTitle:@"Detail"];
+	[name setText:[self.dict objectForKey:@"name"]];
+	[imageView setImage:[UIImage imageWithContentsOfFile:[self.dict objectForKey:@"path"]]];
+}
+
+// 間省略
+- (void)dealloc {
+	[name release];
+	[imageView release];
+	[super dealloc];
+}
+
+@end</code></pre>
+
+<h3><img src="http://img.seiji.me/blog/2008/11/picture.png" alt="picture.png" border="0" width="30" height="30" />PersonDetailViewControllerとViewとの接続</h3>
+<h4>PersonDetail.xib</h4>
+<p> PersonDetail.xibをWクリックしInterfaceBuilderを起動します。Viewを例えば下の図のようにします。<br /><br />
+<img src="http://img.seiji.me/blog/2008/12/view.png" alt="View.png" border="0" width="200" height="313" /><br /><br />
+その後、下の作業を行います。
+</p>
+<ol>
+	<li>File's Ownerのクラス名をPersonDetailViewControllerとする。</li>
+	<li>PersonDetailViewControllerの"view"をUIViewに接続する。</li>
+	<li>PersonDetailViewControllerの"name", "imageView"をそれぞれUILabel, UIImageViewに接続する。</li>
+</ol>
+<h3><img src="http://img.seiji.me/blog/2008/11/xcode.png" alt="xcode.png" border="0" width="30" height="30" />PersonListViewControllerの修正</h3>
+<p>今回作成した、PersonDetailViewControllerはこのままではLoadされません。このPresenceアプリケーションに組み込む必要があります。</p>
+<h4> PersonListViewController.m </h4>
+<pre><code>- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	// Navigation logic may go here. Create and push another view controller.
+	PersonDetailViewController *detailViewController = [[PersonDetailViewController alloc] initWithNibName:@"PersonDetail" bundle:nil];
+	int personIndex = [indexPath indexAtPosition: [indexPath length] - 1];
+	detailViewController.dict = [myData objectAtIndex:personIndex];
+	[self.navigationController pushViewController:detailViewController animated:NO];
+	[detailViewController release];
+}</code></pre>
+<p>これはTableViewのCellを選択した場合にCallされるメソッドです。PersonDetailViewController.hをImportすることも必要です。</p>
+<p>これで下のように動作するかと思います。
+<br /><br /><img src="http://img.seiji.me/blog/2008/12/target-1.png" alt="target-1.png" border="0" width="400" height="337" /><br /><br />
+今回作成したソース<br />
+<a href="http://public.me.com/seijit/iPhone/CS193P/Lecture7">http://public.me.com/seijit/iPhone/CS193P/Lecture7</a>:Presence2.tar.gz
+</p>

@@ -1,0 +1,151 @@
+---
+layout: post
+comment: true
+title: "UIViewの作成-CS193P"
+---
+### UIViewの作成と図形の描画
+
+<p>前回のHelloPolyプロジェクトを拡張します。今回はUIVIewのSubClassを作成し、図形を描画します。
+	<br />
+<img src="http://img.seiji.me/blog/2008/11/cs193p-cocoa-programming-announcements.jpg" alt="CS193P - Cocoa Programming | Announcements.jpg" border="0" width="430" height="89" />
+	<br />
+	<q>
+		<cite><a href="http://www.stanford.edu/class/cs193p/cgi-bin/index.php">iPhone Application Programming</a></cite>
+	</q>
+</p><!--more--><p>
+今迄、作成したソースは<a href="http://public.me.com/seijit/iPhone/CS193P">http://public.me.com/seijit/iPhone/CS193P</a>から
+</p>
+
+<h3><img src="http://img.seiji.me/blog/2008/11/xcode.png" alt="xcode.png" border="0" width="30" height="30" /> UIViewのSubClass作成 </h3>
+<h4>UIView SubClassテンプレート作成</h4>
+<p>UIViewのSubClassを作成します。名前はMyUIViewとします。<br />
+<img src="http://img.seiji.me/blog/2008/11/2-1-1.jpg" alt="2-1-1.jpg" border="0" width="400" height="296" /><br /><br />
+<img src="http://img.seiji.me/blog/2008/11/2-2.jpg" alt="2-2.jpg" border="0" width="400" height="293" />
+
+</p>
+<h4>MyUIViewController.hの変更</h4>
+<p>MyUIViewをPropertyに追加します。</p>
+<pre><code>IBOutlet MyUIView *myUIVIew;
+</code></pre>
+<h3><img src="http://img.seiji.me/blog/2008/11/picture.png" alt="picture.png" border="0" width="30" height="30" /> UIViewとUIViewControllerの接続 </h3>
+<h4>MyUIViewController.hの変更</h4>
+<p>LibraryからUIViewを配置し、Identity InspectorでClassNameをMyViewとします。またMyUIViewControllerのOutletとの接続も行います。<br />
+<img src="http://img.seiji.me/blog/2008/11/2-3-1.jpg" alt="2-3-1.jpg" border="0" width="400" height="250" />
+</p>
+
+<h3><img src="http://img.seiji.me/blog/2008/11/xcode.png" alt="xcode.png" border="0" width="30" height="30" /> UIViewなどの実装 </h3>
+<h4>PolygonShape</h4>
+<p>資料にあったpointsForPolygonInRect:numberOfSides:を追加します。</p>
+<h5>PolygonShape.h</h5>
+<pre><code>+ (NSArray *)pointsForPolygonInRect:(CGRect)rect numberOfSides:(int)numberOfSides;
+</code></pre>
+<h5>PolygonShape.m</h5>
+<pre><code>+ (NSArray *)pointsForPolygonInRect:(CGRect)rect numberOfSides:(int)numberOfSides {
+	CGPoint center = CGPointMake(rect.size.width / 2.0, rect.size.height / 2.0);
+	float radius = 0.9 * center.x;
+	NSMutableArray *result = [NSMutableArray array];
+	float angle = (2.0 * M_PI) / numberOfSides;
+	float exteriorAngle = M_PI - angle;
+	float rotationDelta = angle - (0.5 * exteriorAngle);
+	for (int currentAngle = 0; currentAngle < numberOfSides; currentAngle++) {
+		float newAngle = (angle * currentAngle) - rotationDelta;
+		float curX = cos(newAngle) * radius;
+		float curY = sin(newAngle) * radius;
+		[result addObject:[NSValue valueWithCGPoint:CGPointMake(center.x + curX,
+																center.y + curY)]];
+	}
+	return result;
+}
+</code></pre>
+<h4>MyUIView</h4>
+<p>PolygonShape *をPropertyに追加します。retain,copyはしません。</p>
+<h5>MyUIView.h</h5>
+<pre><code>#import &lt;UIKit/UIKit.h&gt;
+
+@class PolygonShape;
+@interface MyUIView : UIView {
+	PolygonShape *polygon;
+}
+@property (nonatomic, assign) PolygonShape *polygon;
+
+@end
+</code></pre>
+<h5>MyUIView.m</h5>
+<pre><code>#import "MyUIView.h"
+#import "PolygonShape.h"
+
+@implementation MyUIView
+@synthesize polygon;
+
+- (id)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        // Initialization code
+    }
+    return self;
+}
+
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	CGRect bounds = [self bounds];
+
+	CGContextBeginPath(context);
+	NSArray *pointsArray = [PolygonShape pointsForPolygonInRect:bounds numberOfSides:[polygon numberOfSides]];
+	NSEnumerator *pointsEnu = [pointsArray objectEnumerator];
+	// firstPoint
+	CGPoint firstPoint = [[pointsEnu nextObject] CGPointValue];
+	CGContextMoveToPoint (context, firstPoint.x, firstPoint.y);
+	// otherPoint
+	for (NSValue *points in pointsEnu ) {
+		CGPoint thePoint = [points CGPointValue];
+		CGContextAddLineToPoint (context, thePoint.x, thePoint.y);
+	}
+	CGContextClosePath (context);
+	CGContextSetRGBFillColor(context, 0xff/255.0, 0xd7/255.0,0x00/255.0, 1);
+	CGContextDrawPath (context, kCGPathFillStroke);
+}
+
+- (void)dealloc {
+    [super dealloc];
+}
+
+
+@end
+
+</code></pre>
+<h4>MyUIViewController</h4>
+<p>MyUIViewのPolygon*のセット、そしてPolygonの状態が変更された場合の再描画の支持のコードを追加します。</p>
+<h5>MyUIViewController.m</h5>
+<pre><code>- (void)updateInterface {
+	if ( [polygon numberOfSides] == [polygon minimumNumberOfSides]) {
+		decreaseButton.enabled = NO;
+	} else {
+		decreaseButton.enabled = YES;
+	}
+	if ( [polygon numberOfSides] == [polygon maximumNumberOfSides]) {
+		increaseButton.enabled = NO;
+	} else {
+		increaseButton.enabled = YES;
+	}
+	nameOfPolygon.text = [NSString stringWithFormat:@"aka a %@", [polygon name]];
+	numberOfSidesLabel.text = [NSString stringWithFormat:@"%d", [polygon numberOfSides]];
+	numberSlider.value = [polygon numberOfSides];
+	[myUIView setNeedsDisplay];
+}
+
+- (void)viewDidLoad {
+	[polygon setMinimumNumberOfSides:3];
+	[polygon setMaximumNumberOfSides:12];
+	[polygon setNumberOfSides:numberOfSidesLabel.text.integerValue];
+	myUIView.polygon = polygon;
+	[self updateInterface];
+	NSLog (@"My polygon from viewDidLoad: %@", polygon);
+    [super viewDidLoad];
+}
+</code></pre>
+
+<p>これで図形の描画ができるようになりました。状態が変更された場合もその都度、再描画されます。
+<br />
+<img src="http://img.seiji.me/blog/2008/11/iphone.jpg" alt="iPhone シミュレータ.jpg" border="0" width="294" height="553" />
+<br />
+今回作成したソースは<a href="http://public.me.com/seijit/iPhone/CS193P/Lecture3">http://public.me.com/seijit/iPhone/CS193P/Lecture3</a>のHelloPoly3.tar.gzを。状態保存はまた別の機会に行います。</p>

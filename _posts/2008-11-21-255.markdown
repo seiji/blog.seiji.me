@@ -1,0 +1,18 @@
+---
+layout: post
+comment: true
+title: "iPhoneでGoogle Street View"
+---
+<p>iPhone v2.2がリリースされました。機能はいろいろあるみたいですが、触ってみてよかったのは<q><a href="http://www.google.com/help/maps/streetview/">Google Street View</a></q></p>
+<p>
+<br />
+<img src="http://img.seiji.me/blog/2008/11/img-0002.png" alt="IMG_0002.PNG" border="0" width="320" height="480" />
+</p>
+<!--more--><p>まず、検索結果にstreet viewがあれば右のマークが表示される。
+そしてクリックする。</p>
+<p>
+<br />
+<img src="http://img.seiji.me/blog/2008/11/photo1.jpg" alt="photo.jpg" border="0" width="480" height="320" />
+</p>
+<p>横向き固定になるけど、google street viewが見れる。touchインタフェースなので移動がしやすい。さらに全方向見る事ができる。</p>
+<p>なんかiPhoneのようなtouchインタフェースの為のサービスの様な気がします。PCで見るより断然いいや。</p>

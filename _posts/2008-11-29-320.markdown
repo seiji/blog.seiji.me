@@ -1,0 +1,66 @@
+---
+layout: post
+comment: true
+title: "NSUserDefaultsでのデータ保存-CS193P"
+---
+### NSUserDefaultsでのデータ保存
+
+<p>Lecture6の内容にあたります。前回のHelloPolyプロジェクトを拡張します。今回はアプリケーションの終了・起動時にデータを保存・読込みを行います。具体的にはPolygonの辺の数を保存します。データが存在した場合はその数を使い描画を行います。
+	<br />
+<img src="http://img.seiji.me/blog/2008/11/cs193p-cocoa-programming-announcements.jpg" alt="CS193P - Cocoa Programming | Announcements.jpg" border="0" width="430" height="89" />
+	<br />
+	<q>
+		<cite><a href="http://www.stanford.edu/class/cs193p/cgi-bin/index.php">iPhone Application Programming</a></cite>
+	</q>
+</p><!--more--><p>
+今迄、作成したソースは<a href="http://public.me.com/seijit/iPhone/CS193P">http://public.me.com/seijit/iPhone/CS193P</a>から
+</p>
+
+<h3><img src="http://img.seiji.me/blog/2008/11/xcode.png" alt="xcode.png" border="0" width="30" height="30" />データの保存</h3>
+<p>今回は値が変化したタイミングではなく、アプリケーションが終了した時のみ、データの保存を行います。</p>
+<h4>MyUIViewController</h4>
+<p>ViewControllerの中でアプリケーション終了時に呼び出されるメソッドを作成します。</p>
+<h5>MyUIViewController.h</h5>
+<pre>`- (void)willTerminate:(UIApplication *)application;`</pre>
+<h5>MyUIViewController.m</h5>
+<pre><code>-(void)willTerminate:(UIApplication *)application {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setInteger:polygon.numberOfSides forKey:NUMBER_OF_SIDES];
+}
+</code></pre>
+<h4>HelloPolyAppDelegate</h4>
+<p>HelloPolyAppDelegateでapplicationWillTerminate:を実装し、その中でMyUIViewController::willTerminate:をCallします。</p>
+<h5>HelloPolyAppDelegate.m</h5>
+<pre><code>- (void)applicationWillTerminate:(UIApplication *)application {
+	[myUIViewController willTerminate:application];
+}
+</code></pre>
+
+<h3><img src="http://img.seiji.me/blog/2008/11/picture.png" alt="picture.png" border="0" width="30" height="30" />データの読込み</h3>
+<p>アプリケーション起動時に読込むコードを追加します。</p>
+<h4>MyUIViewController </h4>
+<p>MyUIViewControllerでviewDidLoad:のメソッド中にコードを追加します。</p>
+<h5>MyUIViewController.m</h5>
+<pre><code>- (void)viewDidLoad {
+	[polygon setMinimumNumberOfSides:3];
+	[polygon setMaximumNumberOfSides:12];
+	// NSUserDefaults Loading
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	int num = [defaults integerForKey:NUMBER_OF_SIDES];
+	if(num == 0) {
+		[polygon setNumberOfSides:numberOfSidesLabel.text.integerValue];
+	} else {
+		[polygon setNumberOfSides:num];
+	}
+	myUIView.polygon = polygon;
+	[self updateInterface];
+    [super viewDidLoad];
+}
+</code></pre>
+<p>
+値を変えて終了した後、再度起動するとその値が保存されて、描画されるのがわかります。<br />
+<img src="http://img.seiji.me/blog/2008/11/iphone-1.jpg" alt="iPhone シミュレータ-1.jpg" border="0" width="290" height="550" />
+<br /><br />
+今回作成したソースは<a href="http://public.me.com/seijit/iPhone/CS193P/Lecture6">
+http://public.me.com/seijit/iPhone/CS193P/Lecture6</a>のHelloPoly4.tar.gzです。
+</p>

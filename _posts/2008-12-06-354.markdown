@@ -1,0 +1,180 @@
+---
+layout: post
+comment: true
+title: "UINavigationController, TableViewControllerの作成-CS193P"
+---
+### UINavigationControllerの作成
+
+<p>Lecture7を基に、新しい課題"Presence"アプリケーションを作成していきます。実際の内容と脱線するところもありますが、ご了承下さい。
+<br />
+<img src="http://img.seiji.me/blog/2008/11/cs193p-cocoa-programming-announcements.jpg" alt="CS193P - Cocoa Programming | Announcements.jpg" border="0" width="430" height="89" />
+	<br />
+	<q>
+		<cite><a href="http://www.stanford.edu/class/cs193p/cgi-bin/index.php">iPhone Application Programming</a></cite>
+	</q>
+</p><!--more--><p>
+今迄、作成したソースは<a href="http://public.me.com/seijit/iPhone/CS193P">http://public.me.com/seijit/iPhone/CS193P</a>から
+</p>
+### 今回の目標
+<p>下の図のようなアプリケーションの内、PersonListをTableViewで表示できるようになるのが目標です。（左側の図）
+<br /><img src="http://img.seiji.me/blog/2008/12/target-1.png" alt="target-1.png" border="0" width="400" height="337" /></p>
+
+<h3><img src="http://img.seiji.me/blog/2008/11/xcode.png" alt="xcode.png" border="0" width="30" height="30" />新規プロジェクト、ViewControlerの作成</h3>
+<h4>新規プロジェクト作成</h4>
+<p>Navigation-Based Applicationを選択すれば簡単なのですが、今回はあえてWindow-Based Application	を選択して作成していきます。プロジェクト名は"Presence"とします。<br /><br />
+<img src="http://img.seiji.me/blog/2008/12/200812052345.jpg" alt="200812052345.jpg" border="0" width="400" height="301" />
+</p>
+<h4>TableViewController, xibファイルの作成</h4>
+<p>ViewControllerとして今回はTableViewControllerを作成します。また、それに対応するxibファイルを作成します。TableViewControllerのサブクラスのファイル名を"PersonListViewController",xibファイル名を"PersonList.xib"とします。<br /><br />
+<img src="http://img.seiji.me/blog/2008/12/2-1.jpg" alt="2-1.jpg" border="0" width="400" height="303" /><br /><br /><img src="http://img.seiji.me/blog/2008/12/2-2.jpg" alt="新規ファイル.jpg" border="0" width="400" height="303" />
+
+</p>
+<h4>PresenceAppDelegateの修正</h4>
+<p>以前、ViewControllerを追加した同様のやり方で、UINavigationControllerをDelegateクラスに追加します。</p>
+<h5>PresenceAppDelegate.h</h5>
+<pre><code>#import <uikit/UIKit.h>
+@interface PresenceAppDelegate : NSObject <uiapplicationDelegate> {
+	UIWindow *window;
+	UINavigationController *navController;
+}
+@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) IBOutlet UINavigationController *navController;
+@end
+</code></pre>
+<h5>PresenceAppDelegate.m</h5>
+<pre><code>#import "PresenceAppDelegate.h"
+@implementation PresenceAppDelegate
+@synthesize window;
+@synthesize navController;
+- (void)applicationDidFinishLaunching:(UIApplication *)application {
+	// Override point for customization after application launch
+	[window addSubview:[navController view]];
+	[window makeKeyAndVisible];
+}
+
+- (void)dealloc {
+	[window release];
+	[navController release];
+	[super dealloc];
+}
+@end
+</code></pre>
+
+<h3><img src="http://img.seiji.me/blog/2008/11/picture.png" alt="picture.png" border="0" width="30" height="30" />UINavigationControllerの配置・接続</h3>
+<h4>MainWindow.xib</h4>
+<p>MainWindow.xibをWクリックしInterfaceBuilderを起動します。ここで、UINavigationControllerを配置します。
+</p>
+<p>LibraryからNavigation ControllerオブジェクトをDrag&DropでDocumentWindow上に作成します。そのオブジェクトに対して、PresenceAppDelegateクラスのOutlet,navControllerを接続します。 <br /><br />
+<img src="http://img.seiji.me/blog/2008/12/1.jpg" alt="ピクチャ 1.jpg" border="0" width="400" height="250" />
+</p>
+<p>Navigation Controllerオブジェクトの下にはView Controllerオブジェクトがあります。このクラス名を"PersonListViewController", NIB Nameを"PersonList"とします。 <br /><br />
+<img src="http://img.seiji.me/blog/2008/12/21.jpg" alt="ピクチャ 2.jpg" border="0" width="400" height="250" />
+</p>
+<p>最後にNavigation ControllerオブジェクトをWクリックしView画面を出します。タイトルを"PersonList"とします。 <br /><br />
+<img src="http://img.seiji.me/blog/2008/12/3.jpg" alt="ピクチャ 3.jpg" border="0" width="400" height="250" />
+</p>
+<p>これでMainWindow.xibを閉じ、今度はPersonList.xibを開きます。</p>
+<h4> PersonList.xib</h4>
+<p>初めにLibraryからTableViewを選択しview上にDrag&Dropで配置し、各Cellの高さをSize Inspectorでheightを60.00にします。次にFile's OwnerのClass名を"PersonListViewController"とし、最後にPersonListViewControllerのviewをTableViewに接続して終了です。<br /><br /><img src="http://img.seiji.me/blog/2008/12/4.jpg" alt="ピクチャ 4.jpg" border="0" width="400" height="250" />
+</p>
+<p>これで、Navigation-Based Applicationを選択した場合に近いものができました。
+</p>
+
+<h3><img src="http://img.seiji.me/blog/2008/11/xcode.png" alt="xcode.png" border="0" width="30" height="30" />TableViewControllerの実装</h3>
+<p>先ほど、作成したTableViewControllerのSubClassのPersonListViewControllerの実装を行います。
+</p>
+<h4>読み込むデータ</h4>
+<p>今回、読み込むデータは静的なものにします。Project内(Bundle内)に画像(i.g. Bors.jpg)をDrag&Dropで配置します。今回使用した画像は<a href="http://www.southparkstudios.com/">South Park Studios</a>で作成したものを使わせていただいています。<br /><br />
+<img src="http://img.seiji.me/blog/2008/12/personlistviewcontrollerm-presence-1.png" alt="PersonListViewController.m — Presence-1.png" border="0" width="200" height="339" /><br /><br />
+ファイルパスを取得し、ファイル名を名前とするわけです。
+</p>
+<h4>UIImageの拡張</h4>
+<p>UIImageはImageを扱うクラスです。今回、用意している画像は120px × 120pxで、このまま表示するとCellからはみだします。画像を縮小して表示したいのですが、UIImageには簡単に行えるのがない為、UIImageのカテゴリを実装し、リサイズの機能を付加します。</p>
+<h5>UIImageResize.h</h5>
+<pre><code>#import &lt;Foundation/Foundation.h&gt;
+@interface UIImage (Resize)
+- (UIImage*)resize:(CGRect)rect;
+@end</code></pre>
+
+<h5>UIImageResize.m</h5>
+<pre><code>#import "UIImageResize.h"
+
+@implementation UIImage (Resize)
+- (UIImage*)resize:(CGRect)rect {
+	UIGraphicsBeginImageContext(rect.size);
+	[self drawInRect:rect];
+	UIImage *imageCopy =　UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	return imageCopy;
+}
+@end</code></pre>
+<p>これでResizeのメソッドを持つUIImazeを扱えるようになりました。</p>
+<h4>PersonListViewController.h</h4>
+<pre><code>#import &lt;UIKit/UIKit.h&gt;
+
+@interface PersonListViewController : UITableViewController {
+	NSMutableArray *myData;
+}
+
+@property (nonatomic, retain) NSArray *myData;
+@end</code></pre>
+
+<h4>PersonListViewController.m</h4>
+<pre><code>#import "PersonListViewController.h"
+#import "UIImageResize.h"
+
+@implementation PersonListViewController
+@synthesize myData;
+
+// 間省略
+
+- (void)dealloc {
+	[myData release];
+	[super dealloc];
+}
+</code></pre>
+<p>Bundleからファイルを読込みNSMutableArrayに格納します。</p>
+<pre><code>- (void)viewDidLoad {
+    [super viewDidLoad];
+	// load data
+	self.myData = [NSMutableArray array];
+	NSBundle *bundle = [NSBundle mainBundle];
+	NSArray *imgPaths = [bundle pathsForResourcesOfType:@"jpg" inDirectory:@""];
+	NSString *path;
+	for (path in imgPaths) {
+		NSString *name =[[path lastPathComponent] substringToIndex:[[path lastPathComponent] length]- [@".jpg" length]];
+		NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:name, @"name", path, @"path", nil];
+		[myData addObject:dic];
+	}
+}
+</code></pre>
+<p>TableViewを表示する為のメソッドを実装します。</p>
+<pre><code>// Customize the number of rows in the table view.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [myData count];
+}
+
+
+// Customize the appearance of table view cells.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+	static NSString *CellIdentifier = @"Cell";
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	if (cell == nil) {
+		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+	}
+
+	// Set up the cell...
+	int personIndex = [indexPath indexAtPosition: [indexPath length] - 1];
+	UIImage *image= [UIImage imageWithContentsOfFile:[[myData objectAtIndex:personIndex] objectForKey:@"path"]];
+
+	[cell setImage:[image resize:CGRectMake(0, 0, 60, 60)]];
+	[cell setText:[[myData objectAtIndex:personIndex] objectForKey:@"name"]];
+	return cell;
+}
+</code></pre>
+
+<p>これで下のように動くはずです。<br /><br />
+<img src="http://img.seiji.me/blog/2008/12/iphone.png" alt="iPhone シミュレータ.png" border="0" width="200" height="381" /><br /><br />
+今回作成したソースは<a href="http://public.me.com/seijit/iPhone/CS193P/Lecture7">http://public.me.com/seijit/iPhone/CS193P/Lecture7</a>のPresence.tar.gzです。
+</p>

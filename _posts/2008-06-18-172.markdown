@@ -1,0 +1,30 @@
+---
+layout: post
+comment: true
+title: "Firefox3 Release"
+---
+<p>Firefox3が正式にReleaseされました。</p>
+<p>
+<br />
+<a href="http://mozilla.jp/firefox/"><img src="http://img.seiji.me/blog/2008/06/mozilla-firefox-web-browser-thunderbird-email-client-1.jpg" alt="Mozilla | Firefox web browser &amp; Thunderbird email client-1.jpg" border="0" width="355" height="159" /></a>
+<br />
+<q>
+<cite><a href="http://mozilla.jp/firefox/">http://mozilla.jp/firefox</a>/</cite>
+</q>
+</p>
+
+
+
+
+
+<!--more-->
+
+
+
+<p>動作もサクサクしており、主要なアドオンも対応しておりといいですね。
+</p>
+<p>
+<a href="http://blog.mozilla.com/store/2008/06/06/official-firefox-3-t-shirt/"><img src="http://img.seiji.me/blog/2008/06/the-mozilla-store-blog-blog-archive-official-firefox-3-t-shirt.jpg" alt="The Mozilla Store Blog » Blog Archive » Official Firefox 3 T-Shirt!.jpg" border="0" width="340" height="153" /></a>
+<br />
+<q><cite><a href="http://mozilla.jp/firefox/">The Mozilla Store Blog  &raquo; Blog Archive   &raquo; Official Firefox 3 T-Shirt!</a></cite></q>
+</p>

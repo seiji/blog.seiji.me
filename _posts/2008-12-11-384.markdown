@@ -1,0 +1,123 @@
+---
+layout: post
+comment: true
+title: "UITableViewDelegate, UITableViewDataSource-CS193P"
+---
+### UITableViewDelegate, UITableViewDataSource
+
+<p>前回<a href="http://blog.seiji.me/374.html">plistの読込み、UITableViewCellAccessory-CS193P</a>の続きになります。
+AssignmentPresence2の後半にあたります。
+<br />
+<img src="http://img.seiji.me/blog/2008/11/cs193p-cocoa-programming-announcements.jpg" alt="CS193P - Cocoa Programming | Announcements.jpg" border="0" width="430" height="89" />
+	<br />
+	<q>
+		<cite><a href="http://www.stanford.edu/class/cs193p/cgi-bin/index.php">iPhone Application Programming</a></cite>
+	</q>
+</p><!--more--><p>
+今迄、作成したソースは<a href="http://public.me.com/seijit/iPhone/CS193P">http://public.me.com/seijit/iPhone/CS193P</a>から
+</p>
+
+### 今回の目標
+<p>PersonDetailViewControllerを修正し、下のアプリケーションを完成させるのが目的です。List,Detail共にTableViewを使用しています。ListがUITableViewStylePlain, Detailの方がUITableViewStyleGroupedとStyleを変えて表示をしています。
+<br />
+<br />
+<img src="http://img.seiji.me/blog/2008/12/app-11.png" alt="app-1.png" border="0" width="400" height="391" />
+</p>
+<h3><img src="http://img.seiji.me/blog/2008/11/picture.png" alt="picture.png" border="0" width="30" height="30" />PersonDetail.xibの変更</h3>
+<p>PersonDetail.xibをWクリックし、InterfaceBuilderを起動します。ここではViewを大幅に変更します。</p>
+<p>View上にUITableViewのみを配置し、AttributesInspectorでTableViewのStyleを"Grouped"にします。
+<br />
+<br />
+<a href="http://img.seiji.me/blog/2008/12/1-2.png"><img src="http://img.seiji.me/blog/2008/12/1-2.png" alt="ピクチャ 1-2.png" border="0" width="400" /></a>
+</p>
+<p>ConnectionsInspectorでPersonDetailViewControllerのviewをTableViewに、TableViewのdataSource,delegateをPersonDetailViewControllerに接続します。
+<br /><br />
+<img src="http://img.seiji.me/blog/2008/12/table-view-connections-1.png" alt="Table View Connections-1.png" border="0" width="316" height="186" />
+</p>
+<p>
+PersonList.xibでは同じTableViewを使っているのにdataSource,delegateの接続は行いませんでした。この違いはPersonLisrViewControllerはTableViewControllerのSubClassに対して、PersonDetailViewControllerはUIViewControllerのSubClassだからです。</p>
+<h3><img src="http://img.seiji.me/blog/2008/11/xcode.png" alt="xcode.png" border="0" width="30" height="30" />PersonDetailViewControllerの修正</h3>
+<p>
+PersonDetailViewControllerはPersonListViewControllerとは違った形でTableViewを表示させます。ProtocolであるUITableViewDelegate, UITableViewDataSourceの実装を行います。</p>
+<h4>PersonDetailViewController</h4>
+<h5>PersonDetailViewController.h</h5>
+<pre><code>#import &lt;UIKit/UIKit.h&gt;
+
+@class Person;
+@interface PersonDetailViewController : UIViewController &lt;UITableViewDelegate, UITableViewDataSource&gt;  {
+	Person* person;
+}
+@property (nonatomic, assign) Person* person;
+
+@end
+</code></pre>
+<p>
+ProtocolであるUITableViewDelegate, UITableViewDataSourceの宣言をしています。</p>
+<h5>PersonDetailViewController.m</h5>
+<pre><code>#import "PersonDetailViewController.h"
+#import "Person.h"
+#import "PersonText.h"
+
+@implementation PersonDetailViewController
+@synthesize person;
+
+// 略
+@end
+</code></pre>
+<p>
+UITableViewDelegate, UITableViewDataSourceのメソッドを実装します。
+</p>
+<pre><code>- (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section {
+	return [person.textArray count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	static NSString *CellIdentifier = @"MyIdentifer";
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+    }
+    // Set up the cell...
+	PersonText *personText = [person.textArray objectAtIndex:indexPath.row];
+	UILabel *textField = [[UILabel alloc] initWithFrame:CGRectMake(20, 6, personText.size.width, personText.size.height)];
+	[textField setText:[NSString stringWithCString:[personText.textString UTF8String] encoding:NSUTF8StringEncoding]];
+	[textField setBackgroundColor:[UIColor clearColor]];
+	[textField setLineBreakMode:UILineBreakModeWordWrap];
+	[textField setFont:personText.font];
+	[textField setHighlightedTextColor:[UIColor whiteColor]];
+	[textField setNumberOfLines:0];
+	[cell addSubview:textField];
+	[textField release];
+
+    return cell;
+}</code></pre>
+<p>行の数とUITableViewCellの中身の表示を行うメソッドです。UILabelを作成し、UITableViewCellのSubViewとして追加しています。</p>
+<pre><code>
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    // Return the displayed title for the specified section.
+    return @"Statuses";
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	PersonText *personText = [person.textArray objectAtIndex:indexPath.row];
+	int padding = 10;
+	return personText.size.height + padding;
+}
+</code></pre>
+<p>Sectionのヘッダ名を返すメソッドと、各UITableViewCellの高さを返すメソッドです。ここで動的にUITabelViewCellの高さを変化させています。</p>
+
+<h4>PersonListViewController</h4>
+<p>最後にPersonListのUITableViewCellをクリックした際のメソッドを変更しておきます。ここでPersonDetailViewControllerを作成し、UINavigationContollerのStackに追加しています。</p>
+<h5>PersonListViewController.m</h5>
+<pre><code>- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Navigation logic may go here. Create and push another view controller.
+	PersonDetailViewController *detailViewController = [[PersonDetailViewController alloc] initWithNibName:@"PersonDetail" bundle:nil];
+	int personIndex = [indexPath indexAtPosition: [indexPath length] - 1];
+	detailViewController.person = [myData objectAtIndex:personIndex];
+	[self.navigationController pushViewController:detailViewController animated:YES];
+	[detailViewController release];
+}</code></pre>
+<p>これでAssignmentPresence2ができました。<br /><br />
+今回作成したソースは<a href="http://public.me.com/seijit/iPhone/CS193P/Lecture9">http://public.me.com/seijit/iPhone/CS193P/Lecture9</a>のPresence4.tar.gzです。
+</p>

@@ -1,0 +1,72 @@
+---
+layout: post
+comment: true
+title: "BeautifulSoupで厳密なHTMLParse"
+---
+<p>
+Pythonで有名なHTMLParseModuleとしてBeautifulSoupがあります。
+HTMLをParseしてByteSizeを徐々に増やそうとした場合、BeautifulSoupでParseしても変更しない箇所については以前のままで保持する必要があります。が、BeautifulSoupは厳密にParseしています。<br />
+<a href="http://www.crummy.com/software/BeautifulSoup/"><img src="http://img.seiji.me/blog/2008/06/beautiful-soup-we-called-him-tortoise-because-he-taught-us-1.jpg" alt="Beautiful Soup_ We called him Tortoise because he taught us.-1.jpg" border="0" width="370" height="183" /></a>
+<br />
+<q>
+<cite><a href="http://www.crummy.com/software/BeautifulSoup/">Beautiful Soup: We called him Tortoise because he taught us.</a></cite>
+</q>
+</p>
+
+<!--more-->
+
+### target HTML Sample
+<p>下のようなHTMLをtargetとします。</p>
+<pre><code>
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf_8&quot; /&gt;
+&lt;title&gt;BeautifulSoup Test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1&gt;BeautifulSoup Test&lt;/h1&gt;
+&lt;h2&gt;Image&lt;/h2&gt;
+
+&lt;img src=&quot;img/test.gif&quot; title=&quot;testimage&quot;  alt=&quot;testimage&quot; /&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+### BeautifulSoupによるParse
+<p>BeautifulSoupでParseするコードが以下です。</p>
+<pre><code>
+# -*- coding: utf-8 -*-
+from BeautifulSoup import BeautifulSoup
+
+TARGET_FILE='test.html'
+
+if __name__ == '__main__':
+    f=open(TARGET_FILE,'r')
+    s = f.read()
+    soup = BeautifulSoup(s)
+
+    # Before Parse
+    print &quot;Before Length (%d)&quot; % len(s)
+    # After Prase
+    print &quot;After Length (%d)&quot; % len(soup.renderContents())
+</code></pre>
+### 実行結果
+<p>では実際に実行してみます。</p>
+<pre class="console"><code>
+$ python test.py
+Before Length (431)
+After Length (412)</code></pre>
+<p>19バイトも差がでます。どう変更されているのでしょうか？</p>
+
+### 解析
+<p>Parseの前後では中身を比較すると色々変更されていることがわかります。実査に変更された箇所は以下でした。</p>
+<ul>
+	<li>改行コードがCRLF→LFに</li>
+	<li>metaタグのcharsetの表記を訂正されutf_8→utf-8に</li>
+	<li>不要な行が削除</li>
+	<li>要素の属性と属性の間を半角スペース１文字へ</li>
+</ul>
+<p>以上の点が変更された為、ファイルサイズが少なくなっていました。ほんどのCaseでHTMLParseする際はファイルサイズはあまり気にしないとは思いますが、Parseする為に厳密にしているわけですね。</p>

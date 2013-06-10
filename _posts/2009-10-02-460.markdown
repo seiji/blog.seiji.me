@@ -1,0 +1,34 @@
+---
+layout: post
+comment: true
+title: "4ビットマイコン (大人の科学マガジンvol24)"
+categories: 
+ - other
+description: 
+keywords: 
+ - other
+---
+<p>4ビットマイコン (大人の科学マガジンvol24)を買った。</p>
+<p>
+	<br />
+<a href="http://www.flickr.com/photos/31821868@N05/3974639920" title="View 'photo' on Flickr.com"><img src="http://farm3.static.flickr.com/2547/3974639920_20c26c4388.jpg" alt="photo" border="0" width="375" height="500" /></a>
+	<br />
+</p>
+<!--more--><p>
+	<br />
+	<a href="http://www.flickr.com/photos/31821868@N05/3974634926" title="View 'photo' on Flickr.com"><img src="http://farm3.static.flickr.com/2472/3974634926_d853a3f064.jpg" alt="photo" border="0" width="500" height="375" /></a><br />
+こんな感じで入ってる。
+</p>
+<p>
+	<br />
+	<a href="http://www.flickr.com/photos/31821868@N05/3974804984" title="View 'photo' on Flickr.com"><img src="http://farm3.static.flickr.com/2449/3974804984_dba5c064aa.jpg" alt="photo" border="0" width="500" height="375" /></a><br />
+簡単に組み立てできる。
+</p>
+<ul>
+	<li>プログラムメモリ:40byte</li>
+	<li>データメモリ:8byte</li>
+	<li>レジスタ: 8個</li>
+	<li>入力: キーパッド</li>
+	<li>出力: 2進LED, 数字LED, スピーカー</li>
+</ul>
+<p>各アドレスに値を入れたり、プログラムを実行したり、電子音を鳴らしたりできる。なかなかおもしろい。</p>

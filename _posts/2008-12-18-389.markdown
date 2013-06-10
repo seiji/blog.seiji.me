@@ -1,0 +1,114 @@
+---
+layout: post
+comment: true
+title: "OCUnitのTestCase作成"
+---
+<p>OCUnitとはObjective-C用のUnitTest用Frameworkです。
+</p>
+<p>今回はこのOCUnitを試してみたいと思います。-setUp, -tearDownなどJUnitなどのxUnitを使用した経験がある方なら非常に親しみやすいと言えます。</p>
+
+<!--more--><p>以下は全てX-Code上で行います。</p>
+### UnitTest対象
+<p>UnitTestの対象として例えば以下のようなクラスを作成します。</p>
+<h4>Person.h</h4>
+<pre><code>#import <foundation/Foundation.h>
+
+@interface Person : NSObject {
+	NSString *displayName;
+}
+@property (copy) NSString *displayName;
+
+- (id)initWithName:(NSString *)displayName;
+
+@end
+</code></pre>
+<h4>Person.m</h4>
+<pre><code>#import "Person.h"
+
+@implementation Person
+
+@synthesize displayName;
+
+- (id)initWithName:(NSString *)aName {
+	if ((self = [super init])!= nil) {
+		self.displayName = aName;
+	}
+	return self;
+}
+
+- (void) dealloc {
+	[displayName release];
+	[super dealloc];
+}
+
+@end</code></pre>
+### 新規ターゲットの作成
+<ol>
+	<li>ターゲットを選択し、新規ターゲットの作成を選択</li>
+	<li>Cocoa &gt;&gt; Unit Test Bundleを選択し、次へ</li>
+	<li>名前を例えばUnitTestsにして完了</li>
+</ol>
+### ターゲットUnitTestsの情報の変更
+<ol>
+	<li>ビルド &gt;&gt; リンク &gt;&gt;他のリンクフラグのCocoaをFoundationに変更する</li>
+	<li>ビルド &gt;&gt; ユーザー定義 で以下の項目以外を削除する。
+		<ul>
+			<li>GCC_C_LANGUAGE_STANDARD</li>
+			<li>GCC_WARN_ABOUT_RETURN_TYPE</li>
+			<li>GCC_WARN_UNUSED_VARIABLE</li>
+		</ul>
+	</li>
+</ol>
+### Person.mのターゲット修正
+<ol>
+	<li>Person.mのターゲットの中にUnitTestsを追加する</li>
+</ol>
+
+### 新規TestCaseの作成
+<ol>
+	<li>ファイル &gt;&gt 新規ファイルを選択</li>
+	<li>Cocoa Touch Classes &gt;&gt; NSObject subclassを選択し、次へ</li>
+	<li>名前を例えばPersonTest、ターゲットをUnitTestsにして完了</li>
+</ol>
+### TestCaseの実装
+<h4>PersonTest.h</h4>
+<pre><code>#import <senTestingKit/SenTestingKit.h>
+
+@class Person;
+@interface PersonTest : SenTestCase {
+	Person *person;
+}
+
+@end</code></pre>
+<h4>PersonTest.m</h4>
+<pre><code>#import "PersonTest.h"
+#import "Person.h"
+
+@implementation PersonTest
+
+- (void)setUp {
+	person = [[Person alloc] init];
+}
+
+- (void)testCreatePerson {
+	STAssertNotNil(person, @"Couldn't create Person");
+}
+
+- (void)testSetDisplayName {
+    NSString *displayName = @"Seiji";
+    person.displayName = displayName;
+    STAssertEqualObjects(displayName, person.displayName, @"Couldn't set person.displayName");
+}
+
+- (void)tearDown {
+	[person release];
+}
+
+@end</code></pre>
+### TestCaseの実行
+<p>UnitTestsを選択し、Buildを行うことでTestCaseが実行される。想定結果が違うものであればBuildの時点でErrorが表示されることになります。</p>
+<h6>References</h6>
+<ul>
+	<li><a href="http://developer.apple.com/tools/unittest.html">Test Driving Your Code with OCUnit</a></li>
+	<li><a href="http://www.stanford.edu/class/cs193p/cgi-bin/index.php">Lecture 19 - Unit Testing, Objective-C Runtime Fun and Localization</a></li>
+</ul>

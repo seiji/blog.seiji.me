@@ -1,0 +1,22 @@
+---
+layout: post
+comment: true
+title: "^NSStringFrom.* functions"
+---
+<p>NSStringFromから続くFunctionは非常に便利です。特にCGRect, CGPoint, CGSizeを出力したい場合も展開して出力するのは面倒です。</p>
+<p>
+	<br />
+<img src="http://img.seiji.me/blog/2008/12/uikit-function-reference.jpg" alt="UIKit Function Reference  デベロッパドキュメント.jpg" border="0" width="224" height="193" />
+	<br />
+    
+</p>
+
+<!--more--><p> NSStringFromCGRect, NSStringFromClassを使い次のように出力してみます。</p>
+<pre><code>// CGRect
+NSLog(@"%@", NSStringFromCGRect([self.view bounds]));
+// Class
+NSLog(@"%@", NSStringFromClass([[[UIApplication sharedApplication] delegate] class]));
+</code></pre>
+<h4>出力</h4>
+<pre class="console"><code>2008-12-25 19:44:29.628 HelloWorld[39711:20b] {% raw %} {{0, 0}, {320, 460}} {% endraw %}
+2008-12-25 19:44:29.629 HelloWorld[39711:20b] HelloWorldAppDelegate</code></pre>

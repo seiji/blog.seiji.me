@@ -1,0 +1,98 @@
+---
+layout: post
+comment: true
+title: "Social Bookmarkボタンの設置"
+---
+<p>Social Bookmarkボタンを設置するのが常となってきています。どこのボタン、そしてどのように設置をしたらよいのでしょうか？</p>
+<p><img src="http://img.seiji.me/blog/2008/05/social-bookmark-iconset-vikiworks-studio.jpg" alt="Social Bookmark Iconset | Vikiworks™ Studio.jpg" border="0" width="412" height="160"  />
+<q><a href="http://vikiworks.com/2007/06/15/social-bookmark-iconset/" target="_blank"><cite>Social Bookmark Iconset | Vikiworks™ Studio</cite></a></q>
+</p>
+
+
+
+<!--more-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><a href="http://www.addclips.org/" target="_blank">AddClps</a>などのボタン総合サービスを提供しているサイトもありますが、今回は個別に設置することを考えていきたいと思います。
+</p>
+
+### 主要なSocialBookmark
+<p>まず設置を欠かせないのは以下の5つでしょう。</p>
+<ul>
+<li><img src="http://img.seiji.me/blog/2008/05/hatena.jpg" alt="hatena.jpg" border="0" width="16" height="16" />&nbsp;<a href="http://b.hatena.ne.jp/" target="_blank">はてなブックマーク</a></li>
+<li><img src="http://img.seiji.me/blog/2008/05/livedoor.gif" alt="livedoor.gif" border="0" width="16" height="16" />&nbsp;<a href="http://clip.livedoor.com/" target="_blank">livedoorクリップ</a></li>
+<li><img src="http://img.seiji.me/blog/2008/05/google.jpg" alt="google.jpg" border="0" width="16" height="16" />&nbsp;<a href="http://www.google.co.jp/bookmarks" target="_blank">Googleブックマーク</a></li>
+<li><img src="http://img.seiji.me/blog/2008/05/yahoo.gif" alt="yahoo.gif" border="0" width="16" height="16" />&nbsp;<a href="http://bookmarks.yahoo.co.jp/all" target="_blank">Yahoo! ブックマーク</a></li>
+<li><img src="http://img.seiji.me/blog/2008/05/delicious.gif" alt="delicious.gif" border="0" width="16" height="16" /> &nbsp;<a href="http://del.icio.us/" target="_blank">del.icio.us</a></li>
+
+</ul>
+
+### 各SocialBookmarkボタンの設置方法
+<p>実際にこのサイトにも設置したいと思います。</p>
+<ul>
+<li><img src="http://img.seiji.me/blog/2008/05/hatena.jpg" alt="hatena.jpg" border="0" width="16" height="16" />&nbsp;<a href="#b_hatena">はてなブックマークの設置方法</a></li>
+<li><img src="http://img.seiji.me/blog/2008/05/livedoor.gif" alt="livedoor.gif" border="0" width="16" height="16" />&nbsp;<a href="#b_livedoor">livedoorクリップの設置方法</a></li>
+<li><img src="http://img.seiji.me/blog/2008/05/google.jpg" alt="google.jpg" border="0" width="16" />&nbsp;<a href="#b_google">Googleブックマークの設置方法</a></li>
+<li><img src="http://img.seiji.me/blog/2008/05/yahoo.gif" alt="yahoo.gif" border="0" width="16" height="16" />&nbsp;<a href="#b_yahoo">Yahoo! ブックマークの設置方法</a></li>
+<li><img src="http://img.seiji.me/blog/2008/05/delicious.gif" alt="delicious.gif" border="0" width="16" height="16" />&nbsp;<a href="#b_delicious">del.icio.usブックマークの設置方法</a></li>
+</ul>
+
+<h4><img src="http://img.seiji.me/blog/2008/05/hatena.jpg" alt="hatena.jpg" border="0" width="16" height="16" />&nbsp;<a name="b_hatena">はてなブックマークの設置方法</a></h4>
+<pre><code>
+&lt;a href="http://b.hatena.ne.jp/entry/<$ArticlePermalink$>"&gt;
+&lt;img src="画像のURL" width="16" height="12"
+ style="border: none;" alt="このエントリーを含むはてなブックマーク"
+ title="このエントリーを含むはてなブックマーク" /&gt;
+&lt;/a&gt;</code></pre>
+<q><a href="http://b.hatena.ne.jp/help/button" target="_blank"><cite>はてなブックマーク - ヘルプ</cite></a></q>
+
+<h4><img src="http://img.seiji.me/blog/2008/05/livedoor.gif" alt="livedoor.gif" border="0" width="16" height="16" />&nbsp;<a name="b_livedoor">livedoorクリップの設置方法</a></h4>
+<pre><code>
+&lt;a href="http://clip.livedoor.com/redirect?link=<$ArticlePermalink$>&title=<$BlogTitle URIESCAPE$>%20-%20<$ArticleTitle URIESCAPE$>&ie=utf" class="ldclip-redirect" title="この記事をクリップ！"&gt;&lt;img src="http://parts.blog.livedoor.jp/img/cmn/clip_16_16_w.gif" width="16" height="16" alt="この記事をクリップ！" style="border: none;vertical-align: middle;" /&gt;
+&lt;/a&gt;</code></pre>
+<q><a href="http://clip.livedoor.com/guide/blog.html" target="_blank"><cite>livedoor クリップ - ブログに「clip!」ボタンを設定しよう！</cite></a></q>
+
+<h4><img src="http://img.seiji.me/blog/2008/05/google.jpg" alt="google.jpg" border="0" width="16" />&nbsp;<a name="b_google">Googleブックマークの設置方法</a></h4>
+<pre><code>
+&lt;a href="http://www.google.com/bookmarks/mark?op=edit&bkmk=<$ArticlePermalink$>&title=<$BlogTitle URIESCAPE$>" target="_blank"&gt;&lt;img alt="" src="http://www.google.co.jp/favicon.ico" border="0" width="16" height="16" /&gt; このページを Google Bookmarks に追加
+&lt;/a&gt;</code></pre>
+
+<h4><img src="http://img.seiji.me/blog/2008/05/yahoo.gif" alt="yahoo.gif" border="0" width="16" height="16" />&nbsp;<a name="b_yahoo">Yahoo! ブックマークの設置方法</a></h4>
+<pre><code>
+&lt;a href="javascript:void window.open('http://bookmarks.yahoo.co.jp/bookmarklet/showpopup?t='+encodeURIComponent(document.title)+'&u='+encodeURIComponent(location.href)+'&ei=UTF-8','_blank','width=550,height=480,left=100,top=50,scrollbars=1,resizable=1',0);"&gt;&lt;img src="http://i.yimg.jp/images/sicons/ybm16.gif" width="16" height="16" alt="Yahoo!ブックマークに登録" style="border:none;"&gt;
+&lt;/a&gt;</code></pre>
+<q><a href="http://bookmarks.yahoo.co.jp/settings/tools/savelink" target="_blank"><cite>便利ツール : 「Yahoo!ブックマークに登録」ボタン・アイコン</cite></a></q>
+
+<h4><img src="http://img.seiji.me/blog/2008/05/delicious.gif" alt="delicious.gif" border="0" width="16" height="16" />&nbsp;<a name="b_delicious">del.icio.us ブックマークの設置方法</a></h4>
+<pre><code>
+&lt;a href="http://del.icio.us/post?url=<$ArticlePermalink$>&title=<$BlogTitle URIESCAPE$>"&gt;del.icio.us it!
+&lt;/a&gt;</code></pre>
+
+<p>
+あんまり多くのボタンを付けてもあれですので、上記5つを設置したいと思います。
+</p>

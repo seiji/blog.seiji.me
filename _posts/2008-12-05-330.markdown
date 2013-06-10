@@ -1,0 +1,21 @@
+---
+layout: post
+comment: true
+title: "VIX指数"
+---
+<p>アメリカ市場が底を打ったとか言われていたりするところもありますが、アメリカ自動車業界のBIG3はどうなるんでしょうか？情勢を判断する為にVIX指数をこのサイトに貼ってみることにしました。また、VIX指数は恐怖指数とも呼ばれています。
+</p>
+
+<blockquote>
+恐怖指数(きょうふしすう、Volatility Index 略称:VIX)とは、シカゴ・オプション取引所(CBOE)が、S&P500を対象とするオプション取引のボラティリティを元に算出、公表している指数。数値が高いほど投資家が相場の先行きに不透明感を持っているとされる。通常は10から20の間で推移する。
+	<q>
+		<cite><a href="http://ja.wikipedia.org/wiki/恐怖指数">恐怖指数</a></cite>
+	</q>
+</blockquote><br />
+
+<!--more--><p>
+Chicago Board Option Exchange Volatile Index(CBOE VIX)はGoogle financeにはないんです。なのでYahoo financeからデータをとることにしました。ブログパーツであるかなと思ったのですが、結局WebからScrapingして貼っています。
+</p>
+<p>
+この値が早く下がるような情勢になればよいですね。
+</p>

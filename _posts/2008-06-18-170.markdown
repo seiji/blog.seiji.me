@@ -1,0 +1,58 @@
+---
+layout: post
+comment: true
+title: "mod_dbd (mysql driver)"
+---
+<p>Apache2.2以上で使えるmod_dbdをDriverをMySQLにして使用しました。
+少し嵌ったのでメモです。</p>
+<p>
+<img src="http://img.seiji.me/blog/2008/06/mod-dbd-apache-http-server.jpg" alt="mod_dbd - Apache HTTP Server.jpg" border="0" width="399" height="177" />
+<br />
+</p>
+
+<!--more-->
+<p>
+Apache2.2からmod_dbdを使えるのですが、端的に言えばConnectionのPoolingを使用し、ApacheModuleからDatabaseアクセスができるというわけです。ApacheModuleからDatabaseを使用したWEBアプリを作成できるわけで、Apacheだけで完結でき、高パフォーマンスが期待できますね。
+</p>
+
+<p>
+まず、Apacheの設定です。Databaseサーバーのホスト、Database名、接続ユーザーなどを設定します。
+</p>
+<pre><code>    # mod_dbd
+    DBDriver mysql
+    DBDParams host=localhost,user=webscrap,pass=password,dbname=webscrap,sock=/var/lib/mysql/mysql.sock
+    DBDPersist ON
+    DBDKeep 5
+    DBDMax 10
+    DBDMin 3
+    DBDExptime 600</code></pre>
+
+<p>
+次にApacheModuleから呼び出すコードです。
+</p>
+<pre><code>        apr_status_t rv;
+        apr_dbd_results_t *res = NULL;
+        apr_dbd_row_t *row = NULL;
+        char stmt[]  = "select * from webscrap";
+        // get a connection
+        ap_dbd_t *dbd = ap_dbd_acquire(r);
+        if (dbd == NULL) {
+                return;
+        }
+        // query
+        if (apr_dbd_select(dbd->driver, r->pool, dbd->handle, &res, stmt,1) != 0) {
+                return;
+        }
+	int rows = apr_dbd_num_tuples(dbd->driver,res);
+	int cols = apr_dbd_num_cols(dbd->driver,res);
+        for (i=1;i<=rows;i++){
+                rv = apr_dbd_get_row(dbd->driver, r->pool, res, &row, i);
+                if (rv!=0) {
+                        return;
+                }
+                char  *name  = apr_palloc(r->pool,sizeof(char));
+                name  = apr_dbd_get_entry(dbd->driver, row, 0);
+        }</code></pre>
+<p>
+apr_dbd_get_rowの5番目の引数が-1にすると行が取得できないという現象でした。
+</p>

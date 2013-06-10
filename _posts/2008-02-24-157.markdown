@@ -1,0 +1,11 @@
+---
+layout: post
+comment: true
+title: "Mail.app RSSの整理"
+---
+<p>Leopardになり、Mail.appがRSSリーダーとして使えるようになりました。</p>
+<p>RSSを登録できるのですが数が増えるにつれ、そこにフォルダを作成して整理しないと見難くて仕方ありません。</p>
+<!--more-->
+<p>そういう時は実際にRSSのMailBoxがあるところにフォルダを作ってみればOKです。<br />
+場所は/Users/${USER_NAME}/Library/Mail/RSSです。</p>
+<p>これで問題なく動作します。</p>

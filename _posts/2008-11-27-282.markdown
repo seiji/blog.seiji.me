@@ -1,0 +1,81 @@
+---
+layout: post
+comment: true
+title: "インストールしているMacアプリ Part1"
+---
+<p>ありがちなネタですが、未来の自分の為に残しておこうと思います。とりあえず手放せないアプリとしときます。</p>
+<p>
+	<br />
+<img src="http://img.seiji.me/blog/2008/11/mac-app.png" alt="mac_app.png" border="0" width="300" height="100" />
+	<br />
+</p>
+<!--more-->### インストールしているMacアプリケーション
+<p>
+	Applicationフォルダを見て、順にあげていきます。
+</p>
+<h4><img src="http://img.seiji.me/blog/2008/11/k1826336015.jpg" alt="k1826336015.jpg" border="0" width="50" height="50" />Adobe CS3</h4>
+<p>これは言う迄もないですね。この中でも使ってるのはFw, Fl, Ai, Psというとこでしょうか。Dwは後述のCodaを使っているおかげで使わなくなってきています。もうCS4ですよね。どうしましょうか。。。<br />
+	<q>
+		<cite><a href="http://www.adobe.com/jp/products/creativesuite/">Adobe - Creative Suite 4ファミリー</a></cite>
+	</q>
+</p>
+<h4><img src="http://img.seiji.me/blog/2008/11/appcleaner.png" alt="AppCleaner.png" border="0" width="48" height="48" />AppCleaner</h4>
+<p>アプリケーションをアンインストールする際に、そのアプリケーションが使用していたファイルもまとめて消してくれるアプリですね。<br />
+	<q>
+		<cite><a href="http://www.freemacsoft.net/AppCleaner/">AppCleaner</a></cite>
+	</q>
+</p>
+<h4><img src="http://img.seiji.me/blog/2008/11/coda-icon.jpg" alt="coda_icon.jpg" border="0" width="48" height="48" />Coda </h4>
+<p>Webオーサリングツールといってもよいのでしょうか。エディタ、サイトアップロード機能、SSHクライアント、Subversionクライアントなどと機能が揃っています。中でもエディタのブロック単位の編集モード、インタフェースのわかりやすさは極めて使いやすいと思っています。また、使われているフォント"Panic Sans"は美しいです。<br />
+	<q>
+		<cite><a href="http://www.panic.com/jp/coda/">Coda	</a></cite>
+	</q>
+</p>
+<h4><img src="http://img.seiji.me/blog/2008/11/colloquy.png" alt="Colloquy.png" border="0" width="48" height="48" />Colloquy</h4>
+<p>IRCクライアントです。これがIRCを利用する際はこれが一番だと思っています。IRCでの話相手募集中です。w<br />
+	<q>
+		<cite><a href="http://colloquy.info/"> Colloquy </a></cite>
+	</q>
+</p>
+<h4><img src="http://img.seiji.me/blog/2008/11/icn-cyberduck-48.png" alt="icn_Cyberduck_48.png" border="0" width="48" height="48" />Cyberduck</h4>
+<p>有名なFTPクライアントですね。使いやすいので気にいっています。<br />
+	<q>
+		<cite><a href="http://cyberduck.ch/">Cyberduck</a></cite>
+	</q>
+</p>
+
+<h4><img src="http://img.seiji.me/blog/2008/11/integrity.png" alt="Integrity.png" border="0" width="48" height="48" />Integrity </h4>
+<p>Webサイトのリンクチェッカーソフトです。その用途で使っています。<br />
+	<q>
+		<cite><a href="http://peacockmedia.co.uk/index.php?option=com_content&view=article&id=4:integrity&catid=7:products&Itemid=4"> Integrity </a></cite>
+	</q>
+</p>
+<h4><img src="http://img.seiji.me/blog/2008/11/k417696232.jpg" alt="k417696232.jpg" border="0" width="50" height="50" />iTerm </h4>
+<p>これも有名すぎるSSHクライアントですね。これがないと始まりません。<br />
+	<q>
+		<cite><a href="http://iterm.sourceforge.net/">iTerm</a></cite>
+	</q>
+</p>
+
+<h4><img src="http://img.seiji.me/blog/2008/11/icon-pages.jpg" alt="icon_pages.jpg" border="0" width="50" height="50" /><img src="http://img.seiji.me/blog/2008/11/icon-numbers.jpg" alt="icon_numbers.jpg" border="0" width="50" height="50" /><img src="http://img.seiji.me/blog/2008/11/icon-keynote.jpg" alt="icon_keynote.jpg" border="0" width="50" height="50" />iWork</h4>
+<p>有名すぎるAppleのワークソフトですね。もうプレゼンにはkeynoteなしでは駄目です。。<br />
+	<q>
+		<cite><a href="http://www.apple.com/jp/iwork/">iWork</a></cite>
+	</q>
+</p>
+
+<h4><img src="http://img.seiji.me/blog/2008/11/6a00d4142130d96a4700d4142131056a47-50si.jpg" alt="6a00d4142130d96a4700d4142131056a47-50si.jpg" border="0" width="50" height="50" />MarsEdit</h4>
+<p>ブログライティングソフトです。このブログもこれを使って書いています。他のも使ってみましたが一番これがしっくりきます。<br />
+	<q>
+		<cite><a href="http://www.red-sweater.com/marsedit/">MarsEdit</a></cite>
+	</q>
+</p>
+
+<h4><img src="http://img.seiji.me/blog/2008/11/netnewswire.jpg" alt="netnewswire.jpg" border="0" width="50" height="50" />NetNewsWire </h4>
+<p>RSSReaderクライアントです。Safariでもなく、Mail.appでもなくWeb上のリーダーではなくこれを使っています。iPhone、Windows共に共有できるので気に入っています。<br />
+	<q>
+		<cite><a href="http://www.newsgator.com/INDIVIDUALS/NETNEWSWIRE/">NetNewsWire</a></cite>
+	</q>
+</p>
+
+<p>最後に開発者達に感謝しています。</p>

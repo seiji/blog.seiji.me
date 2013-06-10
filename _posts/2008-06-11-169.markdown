@@ -1,0 +1,6 @@
+---
+layout: post
+comment: true
+title: "utmpからutmpxへ  Leopard(Mac OS X 10.5)"
+---
+Leopard(Mac OS X 10.5)からログイン状態を記録するutmpファイルがutmpxへ変更されています。それに伴い、ヘッダファイルもutmp.hからutmpx.hへと変更されています。

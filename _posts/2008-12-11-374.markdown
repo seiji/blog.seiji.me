@@ -1,0 +1,210 @@
+---
+layout: post
+comment: true
+title: "plistの読込み、UITableViewCellAccessory-CS193P"
+---
+### plistの読込み、UITableViewCellAccessory
+
+<p>Lecture9迄の内容を基に"Presence"アプリケーションを拡張していきます。
+AssignmentPresence2の前半になります。
+<br />
+<img src="http://img.seiji.me/blog/2008/11/cs193p-cocoa-programming-announcements.jpg" alt="CS193P - Cocoa Programming | Announcements.jpg" border="0" width="430" height="89" />
+	<br />
+	<q>
+		<cite><a href="http://www.stanford.edu/class/cs193p/cgi-bin/index.php">iPhone Application Programming</a></cite>
+	</q>
+</p><!--more--><p>
+今迄、作成したソースは<a href="http://public.me.com/seijit/iPhone/CS193P">http://public.me.com/seijit/iPhone/CS193P</a>から
+</p>
+
+### 今回の目標
+<p>前回のPersonListViewControllerを修正し、下のアプリケーションの内、左側を表示できるようになるのが目的です。<br />
+<br /><img src="http://img.seiji.me/blog/2008/12/app-1.png" alt="app-1.png" border="0" width="400" height="331" /></p>
+<p>Performanceは今は考えてなくてよいとのことなので、Performanceは一切考慮していません。</p>
+<h3><img src="http://img.seiji.me/blog/2008/11/xcode.png" alt="xcode.png" border="0" width="30" height="30" /> 前準備</h3>
+<h4>プロジェクトへの追加</h4>
+<p>Presence2Files.zipに含まれていますTwitterAPI部分のソース、TwitterUsers.plistを追加します。TwitterUsers.plistは好きなUserに変更します。
+<br />
+<br />
+<img src="http://img.seiji.me/blog/2008/12/init-presence.png" alt="init — Presence.png" border="0" width="268" height="528" />
+</p>
+<h4>TwitterHelperの修正</h4>
+<p>
+TwitterAPIはデフォルトで20件を返します。そんなに必要ないので5件にします。また、encodingが指定されてないので、指定します。その結果、下のようになります。
+</p>
+<h5>TwitterHelper.m</h5>
+<pre><code>+ (NSArray *)fetchTimelineForUsername:(NSString *)username
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://twitter.com/statuses/user_timeline/%@.json?count=5", username]];
+    NSString *string = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+    return [string JSONValue];
+}
+</code></pre>
+<h3><img src="http://img.seiji.me/blog/2008/11/xcode.png" alt="xcode.png" border="0" width="30" height="30" /> Modelの作成</h3>
+<p>
+起動時にTwiiterにアクセスし、必要な情報をメモリ上に格納します。その為のModelを作成します。例えば、Userの情報を格納するPersonクラス、Userのつぶやきを格納するPersonTextクラスを作成します。
+</p>
+<h4>Personクラス</h4>
+<h5>Person.h</h5>
+<pre><code>import &lt;Foundation/Foundation.h&gt;
+
+@interface Person : NSObject {
+	NSString *name;
+	NSString *screenName;
+	NSString *profileImageURL;
+	NSMutableArray *textArray;
+}
+@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) NSString *screenName;
+@property (nonatomic, retain) NSString *profileImageURL;
+@property (nonatomic, retain) NSMutableArray *textArray;
+
+- (id)initWithPersonName:(NSString *)name;
+- (id)createPerson:(NSString *)personName;
+- (NSString *)description;
+- (void)dealloc;
+
+@end
+</code></pre>
+<h5>Person.m</h5>
+<pre><code>#import "Person.h"
+#import "PersonText.h"
+#import "TwitterHelper.h"
+
+@implementation Person
+@synthesize name, screenName, profileImageURL, textArray;
+
+- (id)initWithPersonName:(NSString *)personName {
+	if ( (self =[super init])!= nil ) {
+		self = [self createPerson:personName];
+	}
+	return self;
+}
+
+- (id)createPerson:(NSString *)personName {
+	// name
+	self.screenName = personName;
+	// Twitter API
+	NSArray *array = [TwitterHelper fetchTimelineForUsername:personName];
+	if([array count]==0) {
+		return nil;
+	}
+	NSDictionary *user = [[array objectAtIndex:0] objectForKey:@"user"];
+	self.profileImageURL = [user objectForKey:@"profile_image_url"];
+	self.name = [user objectForKey:@"name"];
+
+	self.textArray = [NSMutableArray array];
+	NSDictionary *dic;
+	for (dic in array) {
+		NSString *text = [dic objectForKey:@"text"];
+		if (text) {
+			PersonText *personText = [[PersonText alloc] initWithText:text font:[UIFont systemFontOfSize:[UIFont systemFontSize]]];
+			[self.textArray addObject:personText];
+			[personText release];
+		}
+	}
+
+	return self;
+}
+// 略
+@end
+</code></pre>
+<h4>PersonTextクラス</h4>
+<h5>PersonText.h</h5>
+<pre><code>#import &lt;Foundation/Foundation.h&gt;
+
+@interface PersonText : NSObject
+{
+	NSString *textString;
+	UIFont *font;
+	CGSize size;
+}
+@property (nonatomic, retain)NSString *textString;
+@property (nonatomic, retain)UIFont *font;
+@property (nonatomic)CGSize size;
+
+- (id)initWithText:(NSString *)text font:(UIFont *)fontObj;
+- (void)dealloc;
+
+@end
+</code></pre>
+<h5>PersonText.m</h5>
+<pre><code>#import "PersonText.h"
+
+@implementation PersonText
+
+@synthesize textString;
+@synthesize font;
+@synthesize size;
+
+- (id)initWithText:(NSString *)txt font:(UIFont *)fontObj;{
+	if ((self = [super init])!= nil) {
+		self.textString = txt;
+		self.font = fontObj;
+		CGSize withinSize = CGSizeMake(280, 1000);
+		self.size = [textString sizeWithFont:font constrainedToSize:withinSize lineBreakMode:UILineBreakModeWordWrap];
+	}
+	return self;
+}
+
+// 略
+@end
+</code></pre>
+<p>PersonTextの方は初期化の際にwidth280pxをした際に高さを計算する為にサイズを求めています。
+</p>
+
+<h3><img src="http://img.seiji.me/blog/2008/11/xcode.png" alt="xcode.png" border="0" width="30" height="30" /> PersonListViewControllerの修正</h3>
+<p>PersonListViewController.mを修正していきます。
+</p>
+<h4>plistの読込み</h4>
+<pre><code>- (void)viewDidLoad {
+    [super viewDidLoad];
+	// load data
+	self.myData = [NSMutableArray array];
+	NSBundle *bundle = [NSBundle mainBundle];
+
+	// Load plist
+	NSArray *twitterUsers = [NSArray arrayWithContentsOfFile:[bundle pathForResource:@"TwitterUsers" ofType:@"plist"]];
+	NSString *userName;
+
+	for (userName in twitterUsers){
+		Person *person = [[Person alloc] initWithPersonName:userName];
+		if (person)
+			[myData addObject:person];
+		[person release];
+	}
+}</code></pre>
+<p>viewDidLoadの際にTwitterへアクセスし、Personインスタンスが要素のNSMutableArrayを作成しています。</p>
+<h4>List表示</h4>
+<pre><code>- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    static NSString *CellIdentifier = @"Cell";
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+    }
+
+    // Set up the cell...
+	int personIndex = [indexPath indexAtPosition: [indexPath length] - 1];
+	Person *person = [myData objectAtIndex:personIndex];
+	NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:person.profileImageURL]];
+	UIImage *image= [UIImage imageWithData:imageData];
+
+	[cell setImage:image];
+	[cell setText:person.name];
+    return cell;
+}</code></pre>
+<p>各Personインスタンスを展開しています。ここでも画像へのアクセスを行っています。</p>
+<h4>UITableViewCellAccessory</h4>
+<pre><code>- (UITableViewCellAccessoryType)tableView:(UITableView *)table accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath {
+	return UITableViewCellAccessoryDisclosureIndicator;
+	//return UITableViewCellAccessoryDetailDisclosureButton;
+	//return UITableViewCellAccessoryCheckmark;
+}</code></pre>
+<p>最後にCellの右側に表示されるUITableViewCellAccessoryを表示させる為にメソッドを実装しています。</p>
+
+
+<p>これでplistから読み込んだPersonListが表示されるはずです。<br /><br />
+今回作成したソースは<a href="http://public.me.com/seijit/iPhone/CS193P/Lecture9">http://public.me.com/seijit/iPhone/CS193P/Lecture9</a>のPresence3.tar.gzです。
+</p>

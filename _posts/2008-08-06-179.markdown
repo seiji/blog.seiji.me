@@ -1,0 +1,32 @@
+---
+layout: post
+comment: true
+title: "iPhone 3G 購入"
+---
+<p>
+迷ってましたが、先々週にBIC Cameraでたまたま売ってたのでiPhone買いました。悩んだ末8G Blackです。
+</p>
+<p>
+<br />
+<img src="http://img.seiji.me/blog/2008/08/img-0007.jpg" alt="IMG_0007.JPG" border="0" width="400" height="300" />
+<br />
+</p>
+
+<!--more-->
+<p>
+並びたくはないけど、売ってたら買いたいなぁと思っていたiPhone、買ってしまいました。その時持っていた携帯はauのW51SとemobileのEMonster、さらに新規で契約するのは嫌だったので、auのをMNPしました。初SoftBankです。
+</p>
+### iPhoneを買って
+<p>iPod Touchは元々持っていたので、操作はなんとなくわかってはいたんですけど、やっぱり楽しいですね。気づいたよいところ、あれな点はこんなところでしょうか。</p>
+<h4>iPod Touchに比べてiPhoneのよいとこ</h4>
+<ul>
+<li>単体でブラウジングができる。(iPod TouchだとEmonsterなどのWifiが必要)</li>
+<li>カメラがついている。</li>
+<li>スピーカーがついている。</li>
+<li>iメールを受信した場合の画面が良い。</li>
+<li>Touchより液晶が見やすい気がする。</li>
+<li>Touchより軽い。</li>
+<li>持つ物が１つ減った(iPod Touch + 携帯 → iPhone )</li>
+</ul>
+
+<p>ヘッドフォンの接続口が上部になったのは少しとまどいましたが、概ね満足です。後はBluetoothのA2DPプロファイル(Advanced Audio Distribution Profile)を搭載してくれれば言う事なしです。ヘッドフォンの線をなくしたいのですよ。。</p>

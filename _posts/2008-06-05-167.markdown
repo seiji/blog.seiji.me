@@ -1,0 +1,19 @@
+---
+layout: post
+comment: true
+title: "FireFox RC2"
+---
+<p>FireFox RC2がDLできるようです。こころなしか安定している気がします。</p>
+<p>
+<img src="http://img.seiji.me/blog/2008/06/firefox-web-browser-international-versions-get-firefox-in-your-language-1.jpg" alt="Firefox web browser | International versions_ Get Firefox in your language-1.jpg" border="0" width="331" height="96" />
+<br />
+</p>
+
+<!--more-->
+
+<p>
+早速DLしてみました。現在のDL先は<a href="http://releases.mozilla.org/pub/mozilla.org/firefox/releases/3.0rc2/">こちら</a>のようです。
+</p>
+
+<p>
+本リリースに備えてDownload Dayのバナーでもこのサイトにつけたいと思います。</p>

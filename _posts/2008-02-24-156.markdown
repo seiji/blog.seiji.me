@@ -1,0 +1,10 @@
+---
+layout: post
+comment: true
+title: "Leopard Icon"
+---
+以下の場所にアイコンがあります。
+
+<ul>
+  <li>/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources</li>
+</ul><br />

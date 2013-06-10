@@ -1,0 +1,136 @@
+---
+layout: post
+comment: true
+title: "FeedBurnerの導入のまとめ (WordPress)"
+---
+<p>
+このサイトもWordPressで構築していますがWordPressは3つのFeedを標準で配信しています。より購読者に見やすく、また配信者も使いやすくする為にFeedBurnerを導入したいと思います。
+FeedBurnerには集客支援・最適化・アクセス解析と購読者及び配信者にとってメリットがあります。
+</p>
+<p><img src="http://img.seiji.me/blog/2008/05/feedburner-1.png" alt="FeedBurner-1.png" border="0" width="323" height="100" /><br />
+<q><a href="http://www.feedburner.jp/fb/a/home" target="_blank"><cite>FeedBurner.jp</cite></a></q>
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--more-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### FeedBurnerの特徴
+<p>FeedBurnerの導入メリットには以下の４つがあるそうです。
+</p>
+<ol>
+<li>集客支援</li>
+<li>最適化</li>
+<li>アクセス解析</li>
+<li>広告管理</li>
+</ol>
+<q><a href="http://www.feedburner.jp/fb/a/blogs" target="_blank"><cite>FeedBurner - ブログ</cite></a></q>
+<p>この中でスマートフィード(フィードを各購読者向けに最適化するサービス)、共有ブックマーク・フォトサービス(del.icio.us又はFlickrで更新した情報をフィードに集約できる)、アクセス解析機能は魅力的ではないでしょうか。
+</p>
+
+### FeedBurnerの導入
+<p>FeedBurnerでフィードの設定をした際は、フィードのURLはhttp://feedburner.jp/{Feed名}となります。導入する際はヘッダテンプレートのlink rel="alternate"の部分をFeedBurnerのフィードのURLにすればよいわけです。しかし、Yahoo!ブログ検索では以下の表記があります。
+</p>
+<blockquote>
+<p>主に以下のような場合は、検索エンジン用ロボットの巡回対象とならないことがあります。</p>
+<ul>
+<li>RSSのアドレスが、ブログや各記事のドメインと異なる（例：外部サーバ上のRSSアドレスを直接参照している）
+</li>
+</ul>
+<a href="http://help.yahoo.co.jp/help/jp/blog-search/blog-search-18.html" target="_blank"><cite>Yahoo!ブログ検索 ヘルプ</cite></a>
+</blockquote>
+
+<p>その為、フィードのURLを同じドメインにする必要があります。FeedBurnerには幸いマイ・ブランド機能というものがあります。こちらを使うことにします。
+では次の順序で実際に導入したいと思います。
+</p>
+<ol>
+<li><a href="#proc1">CNAMEの追加(自ドメインでの運用)</a></li>
+<li><a href="#proc2">FeedBurnerの設定</a></li>
+<li><a href="#proc3">WordPressのヘッダテンプレートの変更</a></li>
+<li><a href="#proc4">リダイレクト設定</a></li>
+</ol>
+
+<h4><a name="proc1">1. CNAMEの追加(自ドメインでの運用)</a></h4>
+<p>このドメインのDNSサーバはBINDです。というわけでBINDの設定を行います。
+</p>
+　外部向け正引きゾーンデータベースにCNAMEを追加
+<pre class="console"><code># vi /var/named/chroot/var/named/webscrap.org.db.wan
+
+>> feeds   IN CNAME feeds.feedburner.jp.</code></pre>
+　BIND再起動
+<pre class="console"><code># /etc/init.d/named restart
+named を停止中: .  [  OK  ]
+named を起動中:    [  OK  ]</code></pre>
+　CNAMEの確認
+<pre class="console"><code>$ dig feeds.webscrap.org
+
+; <<>> DiG 9.4.1-P1 <<>> feeds.webscrap.org
+;; global options:  printcmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 7707
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 0
+
+;; QUESTION SECTION:
+;feeds.webscrap.org.            IN      A
+
+;; ANSWER SECTION:
+feeds.webscrap.org.     86345   IN      CNAME   feeds.feedburner.jp.
+feeds.feedburner.jp.    82      IN      A       66.150.96.120
+
+;; Query time: 3 msec
+;; SERVER: 192.168.11.1#53(192.168.11.1)
+;; WHEN: Thu May 15 10:31:01 2008
+;; MSG SIZE  rcvd: 85</code></pre>
+<p>これで確認することができました。
+</p>
+<h4><a name="proc2">2. FeedBurnerの設定</a></h4>
+<p>FeedBurnerにログインしてマイアカウント >> マイブランドのところにフィードのURLを設定します。
+<img src="http://img.seiji.me/blog/2008/05/mybrand.jpg" alt="mybrand.jpg" border="0" width="501" height="97" />
+</p>
+<h4><a name="proc3">3. WordPressのヘッダテンプレートの変更</a></h4>
+<p>link rel="alternate"の部分を下のように変更します。
+</p>
+<pre><code>&lt;link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.webscrap.org/webscrap" /&gt;
+&lt;link rel="alternate" type="text/xml" title="RSS .92" href="http://feeds.webscrap.org/webscrap" /&gt;
+&lt;link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://feeds.webscrap.org/webscrap" /&gt;</code></pre>
+
+<h4><a name="proc4">4. リダイレクト設定</a></h4>
+<p>最後のリダイレクト設定ですが、プラグインの<a href="http://www.feedburner.com/fb/products/feedburner_feedsmith_plugin_2.3.zip">FeedBurner FeedSmith plugin</a>を使います。管理画面でフィードのURLを下のように設定して終了です。<br /><img src="http://img.seiji.me/blog/2008/05/webscrap-feedburner-wordpress-1.jpg" alt="webscrap › FeedBurner — WordPress-1.jpg" border="0" width="453" height="179" />
+</p>

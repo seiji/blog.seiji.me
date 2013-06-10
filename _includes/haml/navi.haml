@@ -2,16 +2,22 @@
   %div.navbar-inner
     %div.container
       %button.btn.btn-navbar{type: 'button', "data-toggle" => "collapse", "data-target" => "#nav-collapse-03" }
-      %a.brand{href: "#"} {{site.name}}
+      %a.brand{href: "#"}
+        %span.fui-home
       %div.nav-collapse.collapse
         %ul.nav
           %li
-            %a{href: ''} Blog
+            %a{href: '/'} Blog
           %li
-            %a{href: '/blog/archives/'} Archives
+            %a{href: '/archives/'} Archives
         %form.navbar-search.form-search.pull-right{action: "", align: "center"}
           %div.input-append
             %input{type: 'hidden', name: 'q', value: "site:{{ site.url | shorthand_url }}"}
             %input.search-query.span2{type: 'text', name: 'q', results: "0", placeholder: "Search"}
             %button.btn.btn-large{type: "submit"}
               %i.fui-search
+        %ul.nav.pull-right
+          %li.divider
+            %a &nbsp;
+          
+            

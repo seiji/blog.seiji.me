@@ -65,6 +65,10 @@ article figure.code {
     margin: 0;
 }
 
+article ul li{
+    font-size: 18px;
+}
+
 .highlight, .gist-highlight {
     margin-bottom: 1.8em;
     background: #002b36;
@@ -81,7 +85,7 @@ article figure.code {
 }
 .highlight .line-numbers, html .gist .gist-file .gist-syntax .gist-highlight .line-numbers {
     text-align: right;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.65em;
     background: #073642 url('/assets/images/noise.png?1337411416') top left !important;
     border-right: 1px solid #00232c !important;
@@ -103,7 +107,7 @@ article figure.code {
     white-space: pre;
     background: #002b36;
     padding: 0;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.65em;
 }
 .highlight table{
@@ -124,18 +128,40 @@ article figure.code {
     color: #93a1a1 !important;
 }
 
-.blog-index .divider {
-  background-color: #e5e5e5;
-  border-bottom: none;
-  margin: 60px 0 20px;
-  padding: 0;
-  height: 2px;
+.blog-index .divider, .archives-index .divider {
+    background-color: #e5e5e5;
+    border-bottom: none;
+    margin: 60px 0 20px;
+    padding: 0;
+    height: 2px;
+}
+
+.archives-index .row {
+    margin: 3em 0;
+}
+
+.archives-index h2{
+    margin-top: 0;
+}
+
+.archives-index p.meta{
+    font-size: 14px;
+    color: #aaa;
 }
 
 ul.nav-list {
   margin: 0 0 2em;
 }
 
+footer {
+    background-color: #edeff1;
+    border-top: 2px solid #d6dbdf;
+    font-size: 15.988px;
+    margin: 0px;
+    padding: 18px 0;
+    position: relative;
+    text-align: center;
+}
 /*****************************************************************************/
 /*
 /* Site

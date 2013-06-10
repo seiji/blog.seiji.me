@@ -22,6 +22,13 @@ header h1 {
 /* Article
 /*
 /*****************************************************************************/
+article {
+    margin: 0 0 0 1em;
+}
+
+article h1 {
+    margin: 1em 0 2em 0;
+}
 
 article h1 {
     font-size: 28px;
@@ -33,6 +40,10 @@ article h2 {
 
 article h3 {
     font-size: 20px;
+}
+
+article h4 {
+    font-size: 18px;
 }
 
 /* article header p.meta { */

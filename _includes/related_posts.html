@@ -1,0 +1,8 @@
+<ul class='nav nav-list'>
+  <li class='nav-header'>Related Posts</li>
+  {% for post in site.related_posts limit:10 %}
+  <li>
+    <a href='{{ BASE_PATH }}{{ post.url }}'>{{ post.title }}</a>
+  </li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,26 @@
+\---
+layout: default
+\---
+%div.blog-index.span9
+  %article
+    %h1 {{ page.category }}
+    %div.divider
+    %div.row
+      {% for post in site.categories[page.category] %}
+      %div.span2
+        %p.meta
+          {{ post.date | date_to_string }}
+      %div.span6
+        %h4
+          %a{href: "{{post.url}}"} {{ post.title }}
+        {% if post.categories and post.categories != empty %}
+        %p
+          posted in
+          {% for category in post.categories %}
+          %a{href: "/categories/{{category | UrlEncode }}"}
+            %u {{ category }}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+%aside.sidebar.span3
+  {% include aside.html %}

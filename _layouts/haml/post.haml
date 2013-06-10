@@ -1,9 +1,11 @@
 \---
 layout: default
 \---
-%h2
-  {{ page.title }}
-%p.meta {{ page.date | date_to_string }}
-
-%div#post
-  {{ content }}
+%div.blog-index.span9
+  {% assign post = page %}
+  %article
+    {% include article.html %}
+  %div.divider
+  {% include related_posts.html %}
+%aside.sidebar.span3
+  {% include aside.html %}

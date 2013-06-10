@@ -1,10 +1,14 @@
 ---
 layout: default
 ---
-<h2>
-  {{ page.title }}
-</h2>
-<p class='meta'>{{ page.date | date_to_string }}</p>
-<div id='post'>
-  {{ content }}
+<div class='blog-index span9'>
+  {% assign post = page %}
+  <article>
+    {% include article.html %}
+  </article>
+  <div class='divider'></div>
+  {% include related_posts.html %}
 </div>
+<aside class='sidebar span3'>
+  {% include aside.html %}
+</aside>

@@ -10,13 +10,26 @@ layout: default
     </article>
     <div class="divider"></div>
   {% endfor %}
-  <div class="pagination">
+
+  <div class="pagination pagination-info">
     {% if paginator.next_page %}
-      <a class="prev" href="{{paginator.next_page}}">&larr; Older</a>
+    <a href="/page{{ paginator.next_page }}" class="btn btn-info previous">
+      <i class="fui-arrow-left"></i>
+      OLDER
+    </a>
     {% endif %}
-    <a href="/blog/archives">Blog Archives</a>
     {% if paginator.previous_page %}
-    <a class="next" href="{{paginator.previous_page}}">Newer &rarr;</a>
+      {% if paginator.previous_page == 1%}
+    <a href="/" class="btn btn-info next">
+      NEWER
+      <i class="fui-arrow-right"></i>
+    </a>
+      {% else %}
+    <a href="/page{{ paginator.previous_page }}" class="btn btn-info next">
+      NEWER
+      <i class="fui-arrow-right"></i>
+    </a>
+      {% endif %}
     {% endif %}
   </div>
 </div>

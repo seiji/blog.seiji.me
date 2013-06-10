@@ -5,16 +5,17 @@
 
 %ul.nav.nav-list
   %li.nav-header Recent Posts
+  {% for post in site.posts limit:10 %}
   %li
-    %a{href: "#"} UXDesign
-  %li
-    %a{href: "#"} UXDesign
-
+    %a{href: "{{ BASE_PATH }}{{ post.url }}"} {{ post.title }}
+  {% endfor %}
+    
 %ul.nav.nav-list
   %li.nav-header Categories
+  {%  for category in site.categories %}
   %li
-    %a{href: "#"} UXDesign
-  %li.divider
-  %li
-    %a{href: "#"} UXDesign
+    %a{href: "/categories/{{ category[0] | url_encode }}/"}
+      {{ category[0] }}
+      %span.nav-counter {{category[1].size}}
+  {% endfor %}
   

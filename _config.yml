@@ -7,15 +7,6 @@ markdown: rdiscount
 safe: false
 lsi: false
 pygments: true
+include: ['_config']
 exclude: ['Capfile', 'Gemfile', 'Gemfile.lock', 'README.md', 'Rakefile', 'bower.json', 'config', 'misc']
 paginate: 5
-assets:
-  dirname: assets
-  baseurl: /assets/
-  sources:
-    - _assets/javascripts
-    - _assets/stylesheets
-    - _assets/images
-  compress:
-    js:   ~
-    css:  ~

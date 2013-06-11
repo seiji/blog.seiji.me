@@ -8,9 +8,12 @@ task :new_post, [:title] do |t, args|
   raise "\e[31mMissing post title!\e[0m" unless title
 
   template = Liquid::Template.parse(File.new(PATH_TEMPLATE_POST).read)
-  # TODO: sanitize title
+
+  file_name = title.gsub(/ /, "-")
+  file_name = file_name.gsub(/[^A-Za-z\-]/, "")
+
   date = Date::today.to_s
-  File.open("_posts/#{date}-#{title}.md", 'w') do |f|
+  File.open("_posts/#{date}-#{file_name}.md", 'w') do |f|
     f.write(template.render(
                             'title' => title,
                             'date'  => date,

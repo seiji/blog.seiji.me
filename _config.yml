@@ -7,7 +7,7 @@ markdown: rdiscount
 safe: false
 lsi: false
 pygments: true
-exclude: ['Capfile', 'Gemfile', 'Gemfile.lock', 'README.md', 'Rakefile', 'config', 'misc']
+exclude: ['Capfile', 'Gemfile', 'Gemfile.lock', 'README.md', 'Rakefile', 'bower.json', 'config', 'misc']
 paginate: 5
 assets:
   dirname: assets

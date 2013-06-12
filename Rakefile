@@ -2,6 +2,8 @@ require 'liquid'
 
 PATH_TEMPLATE_POST="_templates/post.md"
 
+Dir['_rake/*.rake'].each { |r| load r }
+
 desc "Create new post"
 task :new_post, [:title] do |t, args|
   title = args[:title]

@@ -91,11 +91,12 @@ article ul li{
     width: 100%;
     
 }
-.highlight .line-numbers, html .gist .gist-file .gist-syntax .gist-highlight .line-numbers {
+.highlight .line-numbers, .line-numbers {
     text-align: right;
     font-size: 14px;
+    width: 20px;
     line-height: 1.65em;
-    background: #073642 url('/assets/images/noise.png?1337411416') top left !important;
+    background: #073642 url('/images/noise.png?1337411416') top left !important;
     border-right: 1px solid #00232c !important;
     -webkit-box-shadow: #083e4b -1px 0 inset;
     -moz-box-shadow: #083e4b -1px 0 inset;
@@ -111,7 +112,7 @@ article ul li{
 .highlight .line-numbers span, html .gist .gist-file .gist-syntax .gist-highlight .line-numbers span {
     color: #586e75 !important;
 }
-.highlight pre {
+.highlight pre, .gist pre.line-pre {
     white-space: pre;
     background: #002b36;
     padding: 0;
@@ -137,7 +138,7 @@ article ul li{
     padding: .8em .1em !important;
     overflow-x: auto;
     line-height: 1.65em;
-    background: #002b36 url('/assets/images/noise.png?1337411416') top left !important;
+    background: #002b36 url('/images/noise.png?1337411416') top left !important;
     color: #93a1a1 !important;
 }
 

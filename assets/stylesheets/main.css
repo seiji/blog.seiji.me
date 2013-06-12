@@ -17,6 +17,10 @@ header h1 {
     margin: 0.5em 0 0.5em 0;
 
 }
+code, pre {
+    color: #93a1a1;
+    font-family: Consolas,"Liberation Mono",Courier,monospace;
+}
 /*****************************************************************************/
 /*
 /* Article
@@ -69,8 +73,12 @@ article ul li{
     font-size: 18px;
 }
 
+.highlight {
+    margin: 0;
+    width: 100%;
+}
+
 .highlight, .gist-highlight {
-    margin-bottom: 1.8em;
     background: #002b36;
     overflow-y: hidden;
     overflow-x: auto;
@@ -112,11 +120,16 @@ article ul li{
 }
 .highlight table{
     table-layout: fixed;
-    min-width: 947px;
+    min-width: 1000px;
 }
 .highlight table th, .highlight table td.code {
     overflow: hidden;
 }
+.highlight table td.code pre code .line {
+    display: block;
+    white-space: pre;
+}
+
 .pre-code, html .gist .gist-file .gist-syntax .gist-highlight pre, .highlight code {
     overflow: scroll;
     overflow-y: hidden;

@@ -14,8 +14,9 @@
             <a href='/archives/'>Archives</a>
           </li>
         </ul>
-        <form action='' align='center' class='navbar-search form-search pull-right'>
+        <form action='http://google.com/search' align='center' class='navbar-search form-search pull-right'>
           <div class='input-append'>
+            {{ site.url }}
             <input name='q' type='hidden' value='site:{{ site.url | shorthand_url }}'>
             <input class='search-query span2' name='q' placeholder='Search' results='0' type='text'>
             <button class='btn btn-large' type='submit'>

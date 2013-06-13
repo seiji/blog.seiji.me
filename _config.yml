@@ -1,7 +1,6 @@
-name: \x6d\x65\x6d\x6f\x6e
-author:
-  name: Seiji Toyama
-  email: seijit@me.com
+title: \x6d\x65\x6d\x6f\x6e
+name: Seiji Toyama
+email: seijit@me.com
 url: blog.seiji.me
 permalink: /:year/:month/:day/:title
 markdown: rdiscount

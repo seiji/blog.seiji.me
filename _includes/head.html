@@ -1,7 +1,7 @@
 <head>
   <meta charset='utf-8'>
-  <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.name }}</title>
-  <meta content='{{ site.author.name }}' name='author'>
+  <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+  <meta content='{{ site.name }}' name='author'>
   {% capture description %}{% if page.description %}{{ page.description }}{% else %}{{ content | raw_content }}{% endif %}{% endcapture %}
   <meta content='{{ description | strip_html | condense_spaces | truncate:150 }}' name='description'>
   {% if page.keywords %}
@@ -19,5 +19,5 @@
   <link href='/assets/stylesheets/syntax.css' rel='stylesheet' type='text/css'>
   <link href='/assets/stylesheets/main.css' rel='stylesheet' type='text/css'>
   </link>
-  <link href='{{ site.subscribe_rss }}' rel='alternate' title='{{site.name}}' type='application/atom+xml'>
+  <link href='{{ site.subscribe_rss }}' rel='alternate' title='{{site.title}}' type='application/atom+xml'>
 </head>

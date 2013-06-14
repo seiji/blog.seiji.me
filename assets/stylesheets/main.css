@@ -21,6 +21,13 @@ code, pre {
     color: #93a1a1;
     font-family: Consolas,"Liberation Mono",Courier,monospace;
 }
+.code {
+    padding-left: 4px;
+}
+
+pre {
+    margin: 0;
+}
 /*****************************************************************************/
 /*
 /* Article

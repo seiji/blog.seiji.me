@@ -24,3 +24,6 @@
     -# %script{:src=>'/javascripts/jquery-1.8.3.min.js'}
   -# screen.css, modernizr-2.0.js octopress.js
   %link{rel: 'alternate', title: "{{site.title}}", type: 'application/atom+xml', href: "{{ site.subscribe_rss }}"}
+  /[if lt IE 9]
+    %script{:src=>'/assets/javascripts/html5shiv.js'}
+    

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Receive ringermode changed"
+title: "Receiving Ringermode Changed on Android"
 date: 2013-08-13
 comments: true
 categories:

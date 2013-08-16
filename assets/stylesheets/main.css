@@ -76,8 +76,9 @@ article figure.code {
     margin: 0;
 }
 
-article ul li{
-    font-size: 18px;
+article ul li, article ol li {
+    font-size: 16px;
+    line-height: 2.0em;
 }
 
 .highlight {

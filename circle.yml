@@ -1,0 +1,21 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker info
+    - docker build -t seiji/blog.seiji.me:latest .
+
+test:
+  override:
+    - docker run -d -p 9200:9200 seiji/blog.seiji.me:latest; sleep 10
+    - curl --retry 10 --retry-delay 5 -v http://localhost:9200
+
+# deployment:
+#   hub:
+#     branch: master
+#     commands:
+#       - sed "s/<EMAIL>/$DOCKER_EMAIL/;s/<AUTH>/$DOCKER_AUTH/" \
+#           < .dockercfg.template > ~/.dockercfg
+#       - docker push circleci/elasticsearch

@@ -1,3 +1,5 @@
 .bundle/gems
 .bundle/bin
 .git
+.pygments-cache
+.sass-cache

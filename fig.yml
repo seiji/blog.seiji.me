@@ -1,12 +1,5 @@
 blog:
-  # build: .
-  image: seiji/eventboard.in
+  image: seiji/blog.seiji.me
   command: /app/docker/rails/start-server.sh
-  # volumes:
-  #   - /app/eventboard.in/current:/app
   ports:
     - "80:80"
-# redis:
-  # image: dockerfile/redis
-  # ports:
-    # - "6379"

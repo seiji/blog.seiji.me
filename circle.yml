@@ -8,10 +8,16 @@ machine:
   services:
     - docker
 
+environment:
+  CIRCLE_ENV: test
+
 dependencies:
-  override:
+  pre:
     - npm install bower
     - bower install
+    - gem install bundler
+  override:
+    - bundle install
     - bundle exec rake clean
     - bundle exec rake build
     - docker info

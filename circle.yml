@@ -7,9 +7,8 @@ machine:
     version: 0.11.13
   services:
     - docker
-
-environment:
-  CIRCLE_ENV: test
+  environment:
+   CIRCLE_ENV: test
 
 dependencies:
   pre:
@@ -20,8 +19,10 @@ dependencies:
     - bundle install
     - bundle exec rake clean
     - bundle exec rake build
+  post:
     - docker info
     - docker build -t seiji/blog.seiji.me:latest .
+
 test:
   override:
     - docker run -d -p 9200:9200 seiji/blog.seiji.me:latest; sleep 10

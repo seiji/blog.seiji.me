@@ -1,12 +1,21 @@
 machine:
+  timezone:
+    Asia/Tokyo
+  ruby:
+    version: 2.1.3
+  node:
+    version: 0.11.13
   services:
     - docker
 
 dependencies:
   override:
+    - npm install bower
+    - bower install
+    - bundle exec rake clean
+    - bundle exec rake build
     - docker info
     - docker build -t seiji/blog.seiji.me:latest .
-
 test:
   override:
     - docker run -d -p 9200:9200 seiji/blog.seiji.me:latest; sleep 10

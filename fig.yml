@@ -1,5 +1,9 @@
 blog:
-  image: seiji/blog.seiji.me
-  command: /app/docker/rails/start-server.sh
+  # image: seiji/blog.seiji.me
+  build: .
+  command: /usr/sbin/nginx -g "daemon off;"
   ports:
     - "80:80"
+  volumes:
+    - _site:/app/_site
+    - _config:/app/_config

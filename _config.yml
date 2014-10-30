@@ -7,6 +7,18 @@ markdown: rdiscount
 safe: false
 lsi: false
 pygments: true
-include: ['_config']
-exclude: ['Capfile', 'Gemfile', 'Gemfile.lock', 'README.md', 'Rakefile', 'bower.json', 'config', 'misc']
+include: []
+exclude: [
+  'Capfile',
+  'Dockerfile',
+  'Gemfile',
+  'Gemfile.lock',
+  'README.md',
+  'Rakefile',
+  '_config',
+  'bower.json',
+  'circle.yml',
+  'config',
+  'fig.yml',
+  'misc']
 paginate: 5

@@ -1,0 +1,24 @@
+[Unit]
+Description=Blog service
+   
+# Requirements
+Requires=etcd.service
+Requires=docker.service
+
+# Dependency ordering
+After=etcd.service
+After=docker.service
+
+[Service]
+TimeoutStartSec=0
+KillMode=none
+EnvironmentFile=/etc/environment
+ 
+ExecStartPre=-/usr/bin/docker kill blog.seiji.me.%i
+ExecStartPre=-/usr/bin/docker rm blog.seiji.me.%i
+ExecStartPre=-/usr/bin/docker pull localhost:5000/seiji/blog.seiji.me
+ExecStart=/usr/bin/docker run --name blog.seiji.me.%i -p ${COREOS_PUBLIC_IPV4}:80:80 localhost:5000/seiji/blog.seiji.me
+ExecStop=/usr/bin/docker stop blog.seiji.me.%i
+
+[X-Fleet]
+X-Conflicts=blog.seiji.me.@*.service

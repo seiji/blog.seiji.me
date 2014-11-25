@@ -1,0 +1,24 @@
+[Unit]
+Description=znc service
+   
+# Requirements
+Requires=etcd.service
+Requires=docker.service
+
+# Dependency ordering
+After=etcd.service
+After=docker.service
+
+[Service]
+TimeoutStartSec=0
+KillMode=none
+EnvironmentFile=/etc/environment
+ 
+ExecStartPre=-/usr/bin/docker kill znc.%i
+ExecStartPre=-/usr/bin/docker rm znc.%i
+ExecStartPre=/usr/bin/docker pull jimeh/znc
+ExecStart=/usr/bin/docker run --name znc.%i -p ${COREOS_PUBLIC_IPV4}:6667:6667 -p ${COREOS_PUBLIC_IPV4}:6697:6697 --volumes-from znc_data -v /etc/localtime:/etc/localtime:ro jimeh/znc 
+ExecStop=/usr/bin/docker stop znc.%i
+
+[X-Fleet]
+X-Conflicts=znc.@*.service

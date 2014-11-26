@@ -32,7 +32,7 @@ deployment:
   prod:
     branch: master
     commands:
-      - docker pull google/docker-registry:
+      - docker pull google/docker-registry
       - docker run -d -p 5000:5000 -e GCS_BUCKET=$GCS_BUCKET -e GCP_OAUTH2_REFRESH_TOKEN=$GCP_OAUTH2_REFRESH_TOKEN google/docker-registry; sleep 10
       - docker tag seiji/blog.seiji.me localhost:5000/seiji/blog.seiji.me
       - docker push localhost:5000/seiji/blog.seiji.me

@@ -1,18 +1,5 @@
-FROM centos:centos6
-MAINTAINER Seiji Toyama <seijit@me.com>
+FROM nginx
 
-# Repos
-RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-RUN rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
-
-# Package
-RUN yum -y install --enablerepo=centosplus\
-  tar gcc gcc-c++ curl ntp sudo unzip wget passwd pcre-devel\
-  openssl openssl-devel git nginx &&\
-  yum -y clean all
-
-# ntp
-RUN echo 'ZONE="Asia/Tokyo"' > /etc/sysconfig/clock
 RUN rm -f /etc/localtime
 RUN ln -fs /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 

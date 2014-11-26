@@ -2,3 +2,4 @@
 .bundle/gems
 _site
 .sass-cache
+.vagrant
